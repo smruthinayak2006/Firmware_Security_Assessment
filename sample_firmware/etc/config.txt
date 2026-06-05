@@ -1,0 +1,5 @@
+device_name=IoT Camera
+username=admin
+password=admin123
+wifi_enabled=true
+debug=true
