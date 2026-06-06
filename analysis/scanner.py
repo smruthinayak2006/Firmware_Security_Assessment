@@ -1,27 +1,25 @@
 import os
 
+from secret_detector import detect_secrets
 
-KEYWORDS = [
-    "password",
-    "username",
-    "secret",
-    "key"
-]
 
 
 def scan_firmware(folder_path):
 
-    findings = []
+    results = []
 
 
     for root, folders, files in os.walk(folder_path):
 
+
         for file in files:
+
 
             file_path = os.path.join(
                 root,
                 file
             )
+
 
             try:
 
@@ -34,35 +32,38 @@ def scan_firmware(folder_path):
                     content = f.read()
 
 
-                for keyword in KEYWORDS:
-
-                    if keyword in content.lower():
-
-                        findings.append(
-                            {
-                                "file": file_path,
-                                "issue": keyword
-                            }
-                        )
-
-
-            except Exception as error:
-
-                print(
-                    "Could not scan:",
-                    file_path
+                findings = detect_secrets(
+                    content
                 )
 
 
-    return findings
+                for finding in findings:
+
+
+                    results.append(
+                        {
+                            "file": file_path,
+                            "finding": finding
+                        }
+                    )
 
 
 
-results = scan_firmware(
+            except Exception:
+
+                continue
+
+
+    return results
+
+
+
+scan_results = scan_firmware(
     "sample_firmware"
 )
 
 
-for result in results:
 
-    print(result)
+for item in scan_results:
+
+    print(item)
