@@ -1,6 +1,7 @@
 import os
 
 from secret_detector import detect_secrets
+from config_analyzer import analyze_config
 
 
 
@@ -27,24 +28,41 @@ def scan_firmware(folder_path):
                     file_path,
                     "r",
                     errors="ignore"
+
                 ) as f:
 
                     content = f.read()
 
 
-                findings = detect_secrets(
+
+                secret_results = detect_secrets(
                     content
                 )
 
 
-                for finding in findings:
+                config_results = analyze_config(
+                    content
+                )
+
+
+                all_findings = (
+                    secret_results
+                    +
+                    config_results
+                )
+
+
+
+                for finding in all_findings:
 
 
                     results.append(
+
                         {
                             "file": file_path,
                             "finding": finding
                         }
+
                     )
 
 
@@ -58,12 +76,12 @@ def scan_firmware(folder_path):
 
 
 
-scan_results = scan_firmware(
+results = scan_firmware(
     "sample_firmware"
 )
 
 
 
-for item in scan_results:
+for result in results:
 
-    print(item)
+    print(result)
