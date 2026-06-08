@@ -2,7 +2,7 @@ import os
 
 from secret_detector import detect_secrets
 from config_analyzer import analyze_config
-
+from report_generator import generate_report
 
 
 def scan_firmware(folder_path):
@@ -85,3 +85,9 @@ results = scan_firmware(
 for result in results:
 
     print(result)
+
+
+message = generate_report(results)
+
+
+print(message)
