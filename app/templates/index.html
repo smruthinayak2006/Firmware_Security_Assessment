@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 
+
 <html>
+
 
 <head>
 
+
 <title>
-Firmware Security Assessment
+Firmware Scanner
 </title>
 
-<link 
-rel="stylesheet" 
+
+<link
+rel="stylesheet"
 href="/static/style.css"
 >
+
 
 </head>
 
 
+
 <body>
+
 
 
 <h1>
@@ -24,29 +31,105 @@ Automated Firmware Security Assessment
 </h1>
 
 
+
 <p>
-IoT Firmware Vulnerability Scanner
+Upload IoT firmware for vulnerability analysis
 </p>
 
 
-<h3>
-Implemented Modules
-</h3>
+
+<form
+
+action="/scan"
+
+method="POST"
+
+enctype="multipart/form-data"
+
+>
 
 
-<ul>
+<input
 
-<li>Recursive Firmware Scanner</li>
+type="file"
 
-<li>Secret Detection Engine</li>
+name="firmware"
 
-<li>Configuration Analyzer</li>
+required
 
-<li>JSON Report Generator</li>
+>
 
-</ul>
+
+<br><br>
+
+
+<button type="submit">
+
+Start Security Scan
+
+</button>
+
+
+
+</form>
+
+
+
+<hr>
+
+
+
+{% if results %}
+
+
+<h2>
+Scan Results
+</h2>
+
+
+
+{% for item in results %}
+
+
+<div>
+
+
+File:
+
+{{ item.file }}
+
+
+<br>
+
+
+Finding:
+
+{{ item.finding.issue }}
+
+
+<br>
+
+
+Severity:
+
+{{ item.finding.severity }}
+
+
+
+</div>
+
+
+<br>
+
+
+{% endfor %}
+
+
+{% endif %}
+
 
 
 </body>
+
 
 </html>
