@@ -51,17 +51,3 @@ def detect_secrets(content):
 
 
     return findings
-
-sample = """
-
-username=root
-password=root123
-api_key=ABC12345
-
-"""
-
-
-result = detect_secrets(sample)
-
-
-print(result)
