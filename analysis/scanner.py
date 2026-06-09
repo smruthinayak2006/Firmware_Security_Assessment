@@ -2,92 +2,109 @@ import os
 
 from secret_detector import detect_secrets
 from config_analyzer import analyze_config
-from report_generator import generate_report
 
 
-def scan_firmware(folder_path):
+
+def analyze_file(file_path):
+
+    findings = []
+
+
+    try:
+
+        with open(
+            file_path,
+            "r",
+            errors="ignore"
+        ) as file:
+
+
+            content = file.read()
+
+
+
+        findings.extend(
+            detect_secrets(content)
+        )
+
+
+        findings.extend(
+            analyze_config(content)
+        )
+
+
+    except Exception:
+
+        pass
+
+
+    return findings
+
+
+
+
+
+def scan_firmware(path):
 
     results = []
 
 
-    for root, folders, files in os.walk(folder_path):
+    files_to_scan = []
 
 
-        for file in files:
+
+    if os.path.isfile(path):
+
+        files_to_scan.append(
+            path
+        )
 
 
-            file_path = os.path.join(
-                root,
-                file
+
+    else:
+
+
+        for root, folders, files in os.walk(path):
+
+
+            for file in files:
+
+
+                files_to_scan.append(
+
+                    os.path.join(
+                        root,
+                        file
+                    )
+
+                )
+
+
+
+
+    for file_path in files_to_scan:
+
+
+        findings = analyze_file(
+            file_path
+        )
+
+
+        for finding in findings:
+
+
+            results.append(
+
+                {
+
+                    "file": file_path,
+
+                    "finding": finding
+
+                }
+
             )
 
 
-            try:
-
-                with open(
-                    file_path,
-                    "r",
-                    errors="ignore"
-
-                ) as f:
-
-                    content = f.read()
-
-
-
-                secret_results = detect_secrets(
-                    content
-                )
-
-
-                config_results = analyze_config(
-                    content
-                )
-
-
-                all_findings = (
-                    secret_results
-                    +
-                    config_results
-                )
-
-
-
-                for finding in all_findings:
-
-
-                    results.append(
-
-                        {
-                            "file": file_path,
-                            "finding": finding
-                        }
-
-                    )
-
-
-
-            except Exception:
-
-                continue
-
 
     return results
-
-
-
-results = scan_firmware(
-    "sample_firmware"
-)
-
-
-
-for result in results:
-
-    print(result)
-
-
-message = generate_report(results)
-
-
-print(message)
