@@ -68,7 +68,7 @@ def scan():
 
 
     results = scan_firmware(
-        "sample_firmware"
+        file_path
     )
 
 

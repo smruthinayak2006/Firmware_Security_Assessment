@@ -1,0 +1,9 @@
+device=router
+
+username=admin
+
+password=test123
+
+debug=true
+
+telnet_enabled=true
