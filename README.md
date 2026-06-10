@@ -1,47 +1,139 @@
 # Automated Firmware Security Assessment and Vulnerability Reporting for IoT Devices
 
-## Internship Project
 
-This project is developed as part of an internship to perform automated security assessment of IoT firmware images.
+## Overview
 
-## Objective
+This project is an IoT firmware security analysis tool designed to automate the detection of common firmware vulnerabilities.
 
-Build a lightweight web application that:
+The system allows users to upload firmware files through a Flask dashboard, performs security analysis, detects risky configurations and exposed secrets, and generates vulnerability findings.
 
-- Accepts firmware uploads
-- Extracts firmware contents
-- Detects credentials and secrets
-- Performs basic configuration analysis
-- Generates vulnerability reports
 
-## Planned Technology Stack
+
+## Features
+
+- Firmware upload through web interface
+- Automated file analysis
+- Hardcoded credential detection
+- API key and secret token detection
+- Insecure configuration detection
+- Severity classification
+- Risk summary dashboard
+- Vulnerability report generation
+
+
+
+## Technology Stack
 
 - Python
 - Flask
-- SQLite
 - HTML
 - CSS
-- Git
-- GitHub
-- Binwalk
+- SQLite (planned)
+- Binwalk (planned)
+- Git and GitHub
+
+
+
+## Project Architecture
+
+
+User
+
+↓
+
+Flask Web Interface
+
+↓
+
+Firmware Upload Handler
+
+↓
+
+Scanner Engine
+
+↓
+
+Security Analysis Modules
+
+↓
+
+Risk Analyzer
+
+↓
+
+Report Generation
+
+
+
+## Modules
+
+
+### Scanner Engine
+
+Handles firmware files and performs recursive analysis.
+
+
+### Secret Detector
+
+Detects sensitive information such as:
+
+- Password exposure
+- API keys
+- Secret tokens
+
+
+### Configuration Analyzer
+
+Detects insecure configurations:
+
+- Debug mode enabled
+- Telnet enabled
+- Encryption disabled
+
+
+### Risk Analyzer
+
+Calculates:
+
+- Total vulnerabilities
+- High severity issues
+- Medium severity issues
+- Low severity issues
+
+
+
+## Screenshots
+
+
+### Firmware Dashboard
+
+![Dashboard](screenshots/day11_risk_dashboard.png)
+
+
+### Vulnerability Results
+
+![Results](screenshots/day10_dynamic_scan.png)
+
+
 
 ## Current Status
 
-Day 3 – Basic Firmware File Analysis Completed
+Completed:
 
-Implemented:
-- Python analysis module
-- File reading functionality
-- Basic keyword-based secret detection
+- Core scanner
+- Security modules
+- Flask integration
+- Upload workflow
+- Risk dashboard
 
-## Repository Structure
 
-app/
-analysis/
-reports/
-uploads/
-docs/
-screenshots/
+Upcoming:
+
+- Firmware extraction using Binwalk
+- Database storage
+- PDF report generation
+- UI improvements
+
 
 ## Author
 
