@@ -63,7 +63,49 @@
 
     <hr>
 
+    {% if summary %}
 
+
+<h2>
+Risk Summary
+</h2>
+
+
+
+<div>
+
+
+<h3>
+Total Issues:
+{{ summary.total }}
+</h3>
+
+
+
+<h3>
+High Severity:
+{{ summary.HIGH }}
+</h3>
+
+
+
+<h3>
+Medium Severity:
+{{ summary.MEDIUM }}
+</h3>
+
+
+
+<h3>
+Low Severity:
+{{ summary.LOW }}
+</h3>
+
+
+</div>
+
+
+{% endif %}
 
     <!-- Scan Results Section -->
 
