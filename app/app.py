@@ -15,7 +15,7 @@ sys.path.append(
 
 
 from scanner import scan_firmware
-
+from risk_analyzer import calculate_risk_summary
 
 
 app = Flask(__name__)
@@ -71,13 +71,18 @@ def scan():
         file_path
     )
 
-
+    summary = calculate_risk_summary(
+        results
+    )
 
     return render_template(
 
         "index.html",
 
-        results=results
+        results=results,
+
+        summary=summary
+
     )
 
 
