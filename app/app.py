@@ -5,7 +5,8 @@ import sys
 from flask import (
     Flask,
     render_template,
-    request
+    request,
+    send_file
 )
 
 sys.path.append(
@@ -19,6 +20,8 @@ from database import (
     create_database,
     save_results
 )
+
+from report_generator import generate_report
 
 app = Flask(__name__)
 create_database()
@@ -77,6 +80,10 @@ def scan():
         results
     )
 
+    generate_report(
+        results
+    )
+
     summary = calculate_risk_summary(
         results
     )
@@ -91,7 +98,17 @@ def scan():
 
     )
 
+@app.route("/download-report")
+def download_report():
 
+
+    return send_file(
+
+        "../reports/security_report.json",
+
+        as_attachment=True
+
+    )
 
 
 if __name__ == "__main__":

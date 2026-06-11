@@ -1,0 +1,26 @@
+[
+    {
+        "file": "uploads\\test_firmware_config.txt",
+        "finding": {
+            "issue": "Hardcoded Password",
+            "severity": "HIGH",
+            "matches": [
+                "password=test123"
+            ]
+        }
+    },
+    {
+        "file": "uploads\\test_firmware_config.txt",
+        "finding": {
+            "issue": "Debug Mode Enabled",
+            "severity": "MEDIUM"
+        }
+    },
+    {
+        "file": "uploads\\test_firmware_config.txt",
+        "finding": {
+            "issue": "Telnet Enabled",
+            "severity": "HIGH"
+        }
+    }
+]
