@@ -8,18 +8,20 @@ from flask import (
     request
 )
 
-
 sys.path.append(
     "analysis"
 )
 
-
 from scanner import scan_firmware
 from risk_analyzer import calculate_risk_summary
 
+from database import (
+    create_database,
+    save_results
+)
 
 app = Flask(__name__)
-
+create_database()
 
 
 UPLOAD_FOLDER = "uploads"
@@ -69,6 +71,10 @@ def scan():
 
     results = scan_firmware(
         file_path
+    )
+
+    save_results(
+        results
     )
 
     summary = calculate_risk_summary(
