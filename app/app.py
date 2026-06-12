@@ -23,6 +23,9 @@ from database import (
 
 from report_generator import generate_report
 
+from firmware_extractor import extract_firmware
+
+
 app = Flask(__name__)
 create_database()
 
@@ -72,8 +75,12 @@ def scan():
     )
 
 
-    results = scan_firmware(
+    extracted_path = extract_firmware(
         file_path
+    )
+
+    results = scan_firmware(
+        extracted_path
     )
 
     save_results(
