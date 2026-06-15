@@ -2,68 +2,114 @@
 
 <html>
 
+
 <head>
 
-    <title>
-        Firmware Security Assessment
-    </title>
+
+<title>
+Firmware Security Scanner
+</title>
 
 
-    <link 
-        rel="stylesheet"
-        href="/static/style.css"
-    >
+<link 
+rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}"
+>
+
 
 </head>
+
+
 
 
 <body>
 
 
-    <h1>
-        Automated Firmware Security Assessment
-    </h1>
+<div class="container">
 
 
-    <p>
-        Upload IoT firmware for vulnerability analysis
-    </p>
+<h1>
+🛡 Automated Firmware Security Assessment
+</h1>
 
 
+<p class="subtitle">
 
-    <!-- Firmware Upload Form -->
+IoT Firmware Vulnerability Scanner
 
-    <form 
-        action="/scan"
-        method="POST"
-        enctype="multipart/form-data"
-    >
-
-
-        <input 
-            type="file"
-            name="firmware"
-            required
-        >
-
-
-        <br><br>
-
-
-        <button type="submit">
-
-            Start Security Scan
-
-        </button>
-
-
-    </form>
+</p>
 
 
 
-    <hr>
 
-    {% if summary %}
+
+<form 
+action="/scan"
+method="POST"
+enctype="multipart/form-data"
+>
+
+
+<input 
+type="file"
+name="firmware"
+required
+>
+
+
+<button type="submit">
+
+Start Security Scan
+
+</button>
+
+
+</form>
+
+
+
+
+
+
+{% if filename %}
+
+
+<div class="success">
+
+
+<h3>
+✅ Scan Completed Successfully
+</h3>
+
+
+<p>
+
+File Scanned:
+
+<span>
+
+{{ filename }}
+
+</span>
+
+
+</p>
+
+
+</div>
+
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+{% if summary %}
 
 
 <h2>
@@ -72,120 +118,140 @@ Risk Summary
 
 
 
-<div>
+<div class="cards">
 
 
-<h3>
-Total Issues:
+
+<div class="card">
+
+<h1>
 {{ summary.total }}
-</h3>
+</h1>
+
+<p>Total Issues</p>
+
+</div>
 
 
 
-<h3>
-High Severity:
+
+
+<div class="card high">
+
+<h1>
 {{ summary.HIGH }}
-</h3>
+</h1>
+
+<p>High Severity</p>
+
+</div>
 
 
 
-<h3>
-Medium Severity:
+
+
+<div class="card medium">
+
+<h1>
 {{ summary.MEDIUM }}
-</h3>
+</h1>
+
+<p>Medium Severity</p>
+
+</div>
 
 
 
-<h3>
-Low Severity:
+
+
+<div class="card low">
+
+<h1>
 {{ summary.LOW }}
-</h3>
+</h1>
+
+<p>Low Severity</p>
+
+</div>
+
 
 
 </div>
 
 
+
 {% endif %}
 
-    <!-- Scan Results Section -->
-
-
-    {% if results %}
-
-
-        <h2>
-            Scan Results
-        </h2>
 
 
 
-        {% for item in results %}
-
-
-            <div>
-
-
-                <strong>
-                    File:
-                </strong>
-
-
-                {{ item.file }}
 
 
 
-                <br>
+
+{% if results %}
+
+
+<h2>
+Scan Results
+</h2>
 
 
 
-                <strong>
-                    Finding:
-                </strong>
+{% for item in results %}
 
 
-                {{ item.finding.issue }}
+<div class="result">
 
 
+<h3>
 
-                <br>
+{{ item.finding.issue }}
 
-
-
-                <strong>
-                    Severity:
-                </strong>
-
-
-                {{ item.finding.severity }}
+</h3>
 
 
 
-            </div>
+<p>
+
+<b>File:</b>
+
+{{ item.file }}
 
 
-            <br>
-
-
-        {% endfor %}
-
-
-
-    {% else %}
+</p>
 
 
 
-        <h3>
-            No vulnerabilities detected
-        </h3>
+<p>
+
+<b>Severity:</b>
+
+
+<span class="{{ item.finding.severity }}">
+
+
+{{ item.finding.severity }}
+
+
+</span>
+
+
+</p>
 
 
 
-    {% endif %}
-
-<br>
+</div>
 
 
-<a href="/download-report">
+
+{% endfor %}
+
+
+
+
+
+<a href="/download">
 
 
 <button>
@@ -196,6 +262,15 @@ Download Security Report
 
 
 </a>
+
+
+
+{% endif %}
+
+
+
+</div>
+
 
 
 </body>

@@ -1,99 +1,84 @@
+from flask import Flask, render_template, request, send_file
+
 import os
+
 import sys
 
 
-from flask import (
-    Flask,
-    render_template,
-    request,
-    send_file
+sys.path.append(
+    os.path.abspath("analysis")
 )
 
-sys.path.append(
-    "analysis"
-)
 
 from scanner import scan_firmware
-from risk_analyzer import calculate_risk_summary
 
-from database import (
-    create_database,
-    save_results
-)
+from risk_analyzer import calculate_risk_summary
 
 from report_generator import generate_report
 
-from firmware_extractor import extract_firmware
 
 
 app = Flask(__name__)
-create_database()
 
 
 UPLOAD_FOLDER = "uploads"
 
-
-app.config[
-    "UPLOAD_FOLDER"
-] = UPLOAD_FOLDER
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 
 @app.route("/")
+
 def home():
 
     return render_template(
-        "index.html"
+
+        "index.html",
+
+        results=None,
+
+        summary=None,
+
+        filename=None
+
     )
 
 
 
-@app.route(
-    "/scan",
-    methods=["POST"]
-)
+
+
+@app.route("/scan", methods=["POST"])
+
 def scan():
 
 
-    uploaded_file = request.files[
-        "firmware"
-    ]
+    uploaded_file = request.files["firmware"]
 
 
     file_path = os.path.join(
 
-        app.config[
-            "UPLOAD_FOLDER"
-        ],
+        app.config["UPLOAD_FOLDER"],
 
         uploaded_file.filename
+
     )
 
 
-    uploaded_file.save(
-        file_path
-    )
+    uploaded_file.save(file_path)
 
 
-    extracted_path = extract_firmware(
-        file_path
-    )
 
-    results = scan_firmware(
-        extracted_path
-    )
+    results = scan_firmware(file_path)
 
-    save_results(
-        results
-    )
 
-    generate_report(
-        results
-    )
 
-    summary = calculate_risk_summary(
-        results
-    )
+    summary = calculate_risk_summary(results)
+
+
+
+    generate_report(results)
+
+
 
     return render_template(
 
@@ -101,12 +86,19 @@ def scan():
 
         results=results,
 
-        summary=summary
+        summary=summary,
+
+        filename=uploaded_file.filename
 
     )
 
-@app.route("/download-report")
-def download_report():
+
+
+
+
+@app.route("/download")
+
+def download():
 
 
     return send_file(
@@ -118,8 +110,9 @@ def download_report():
     )
 
 
+
+
 if __name__ == "__main__":
 
-    app.run(
-        debug=True
-    )
+
+    app.run(debug=True)
