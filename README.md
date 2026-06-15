@@ -28,41 +28,19 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Flask
 - HTML
 - CSS
-- SQLite (planned)
-- Binwalk (planned)
+- SQLite Database
+- Binwalk Firmware Extraction
 - Git and GitHub
 
 
 
-## Project Architecture
+## Architecture
 
+Detailed architecture documentation:
 
-User
+See:
 
-↓
-
-Flask Web Interface
-
-↓
-
-Firmware Upload Handler
-
-↓
-
-Scanner Engine
-
-↓
-
-Security Analysis Modules
-
-↓
-
-Risk Analyzer
-
-↓
-
-Report Generation
-
+docs/architecture.md
 
 
 ## Modules
@@ -120,19 +98,22 @@ Calculates:
 
 Completed:
 
-- Core scanner
-- Security modules
-- Flask integration
-- Upload workflow
-- Risk dashboard
+- Firmware upload dashboard
+- Recursive scanner engine
+- Secret detection module
+- Configuration security analysis
+- Risk classification system
+- SQLite vulnerability storage
+- JSON vulnerability reports
+- Binwalk firmware extraction support
 
 
 Upcoming:
 
-- Firmware extraction using Binwalk
-- Database storage
 - PDF report generation
 - UI improvements
+- Final testing
+- Internship documentation
 
 
 ## Author
