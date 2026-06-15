@@ -3,7 +3,7 @@
 
 ## Overview
 
-This project is an IoT firmware security analysis tool designed to automate the detection of common firmware vulnerabilities.
+Automated IoT firmware analysis platform for detecting insecure configurations, exposed secrets, and security risks.
 
 The system allows users to upload firmware files through a Flask dashboard, performs security analysis, detects risky configurations and exposed secrets, and generates vulnerability findings.
 
@@ -83,15 +83,37 @@ Calculates:
 ## Screenshots
 
 
-### Firmware Dashboard
-
-![Dashboard](screenshots/day11_risk_dashboard.png)
+## Screenshots
 
 
-### Vulnerability Results
+### Flask Upload Interface
 
-![Results](screenshots/day10_dynamic_scan.png)
+![Upload](screenshots/day8_flask_homepage.png)
 
+
+### Scanner Integration
+
+![Scanner](screenshots/day9_flask_scanner_integration.png)
+
+
+### Dynamic Firmware Scan
+
+![Dynamic Scan](screenshots/day10_dynamic_scan.png)
+
+
+### Risk Analysis Dashboard
+
+![Risk Dashboard](screenshots/day11_risk_dashboard.png)
+
+
+### Final Security Dashboard UI
+
+![Dashboard](screenshots/day15_dashboard_ui.png)
+
+
+### Vulnerability Scan Results
+
+![Results](screenshots/day15_scan_results.png)
 
 
 ## Current Status
