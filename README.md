@@ -127,15 +127,15 @@ Completed:
 - Risk dashboard
 - Firmware extraction support
 - Firmware metadata extraction
+- CVE vulnerability detection
 - Report generation
 - Database storage
 
-
 Upcoming:
 
+- CVE database expansion
 - Advanced firmware analysis
-- CVE detection
-- Improved reporting 
+- UI enhancements
 
 
 ## Author
