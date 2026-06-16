@@ -1,20 +1,27 @@
-import subprocess
 import os
-
+import subprocess
 
 
 def extract_firmware(file_path):
 
+    output_folder = "extracted_firmware"
+
+
+    if not os.path.exists(output_folder):
+
+        os.makedirs(output_folder)
+
 
     try:
-
 
         subprocess.run(
 
             [
                 "binwalk",
                 "-e",
-                file_path
+                file_path,
+                "-C",
+                output_folder
             ],
 
             check=True
@@ -22,27 +29,20 @@ def extract_firmware(file_path):
         )
 
 
-        extracted_folder = (
-            "_" 
-            + os.path.basename(file_path)
-            + ".extracted"
+        return output_folder
+
+
+    except Exception as error:
+
+        print(
+            "Binwalk extraction failed:",
+            error
         )
 
 
-        if os.path.exists(
-            extracted_folder
-        ):
-
-
-            return extracted_folder
-
-
-
-        return file_path
-
-
-
-    except Exception:
+        print(
+            "Using original uploaded file"
+        )
 
 
         return file_path

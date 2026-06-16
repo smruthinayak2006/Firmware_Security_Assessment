@@ -16,6 +16,7 @@ from risk_analyzer import calculate_risk_summary
 
 from report_generator import generate_report
 
+from firmware_extractor import extract_firmware
 
 
 app = Flask(__name__)
@@ -68,7 +69,14 @@ def scan():
 
 
 
-    results = scan_firmware(file_path)
+    extracted_path = extract_firmware(
+        file_path
+    )
+
+
+    results = scan_firmware(
+        extracted_path
+    )
 
 
 
