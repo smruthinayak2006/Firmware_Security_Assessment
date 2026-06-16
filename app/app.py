@@ -12,11 +12,13 @@ sys.path.append(
 
 from scanner import scan_firmware
 
+from firmware_extractor import extract_firmware
+
 from risk_analyzer import calculate_risk_summary
 
 from report_generator import generate_report
 
-from firmware_extractor import extract_firmware
+from firmware_analyzer import analyze_firmware
 
 
 app = Flask(__name__)
@@ -67,6 +69,9 @@ def scan():
 
     uploaded_file.save(file_path)
 
+    firmware_info = analyze_firmware(
+        file_path
+    )
 
 
     extracted_path = extract_firmware(
@@ -96,7 +101,9 @@ def scan():
 
         summary=summary,
 
-        filename=uploaded_file.filename
+        filename=uploaded_file.filename,
+
+        firmware=firmware_info
 
     )
 

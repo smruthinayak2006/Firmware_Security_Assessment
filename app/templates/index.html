@@ -2,23 +2,185 @@
 
 <html>
 
-
 <head>
 
+    <title>Firmware Security Scanner</title>
 
-<title>
-Firmware Security Scanner
-</title>
+    <style>
 
 
-<link 
-rel="stylesheet"
-href="{{ url_for('static', filename='style.css') }}"
->
+        body {
+
+            background-color: #020817;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+
+        .container {
+
+            width: 70%;
+            margin: 50px auto;
+            background-color: #111827;
+            padding: 50px;
+            border-radius: 25px;
+
+        }
+
+
+        h1 {
+
+            color: #38bdf8;
+            text-align: center;
+            font-size: 40px;
+
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+            color: #94a3b8;
+            font-size: 24px;
+
+        }
+
+
+        form {
+
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+
+        }
+
+
+        input[type=file] {
+
+            background-color: #1e293b;
+            padding: 15px;
+            border-radius: 10px;
+
+        }
+
+
+        button {
+
+            background-color: #38bdf8;
+            border: none;
+            padding: 18px 45px;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+
+        }
+
+
+        .success {
+
+            margin-top: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid #22c55e;
+            background-color: #052e16;
+
+        }
+
+
+        .success h2 {
+
+            color: #22c55e;
+
+        }
+
+
+        .cards {
+
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+
+        .card {
+
+            background-color: #1e293b;
+            width: 150px;
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+
+        }
+
+
+        .card h2 {
+
+            color: #38bdf8;
+            font-size: 40px;
+
+        }
+
+
+        .result-card {
+
+            background-color: #1e293b;
+            margin-top: 30px;
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid #38bdf8;
+
+        }
+
+
+        .result-card h2 {
+
+            color: #38bdf8;
+
+        }
+
+
+        .high {
+
+            color: #ef4444;
+
+        }
+
+
+        .medium {
+
+            color: #eab308;
+
+        }
+
+
+        .low {
+
+            color: #22c55e;
+
+        }
+
+
+        .hash {
+
+            word-break: break-all;
+
+        }
+
+
+        .download {
+
+            margin-top: 30px;
+
+        }
+
+
+
+    </style>
 
 
 </head>
-
 
 
 
@@ -28,9 +190,7 @@ href="{{ url_for('static', filename='style.css') }}"
 <div class="container">
 
 
-<h1>
-🛡 Automated Firmware Security Assessment
-</h1>
+<h1>🛡 Automated Firmware Security Assessment</h1>
 
 
 <p class="subtitle">
@@ -41,20 +201,10 @@ IoT Firmware Vulnerability Scanner
 
 
 
+<form action="/scan" method="POST" enctype="multipart/form-data">
 
 
-<form 
-action="/scan"
-method="POST"
-enctype="multipart/form-data"
->
-
-
-<input 
-type="file"
-name="firmware"
-required
->
+<input type="file" name="firmware">
 
 
 <button type="submit">
@@ -70,28 +220,20 @@ Start Security Scan
 
 
 
-
 {% if filename %}
 
 
 <div class="success">
 
 
-<h3>
-✅ Scan Completed Successfully
-</h3>
+<h2>✅ Scan Completed Successfully</h2>
 
 
 <p>
 
 File Scanned:
 
-<span>
-
-{{ filename }}
-
-</span>
-
+<b>{{ filename }}</b>
 
 </p>
 
@@ -99,10 +241,63 @@ File Scanned:
 </div>
 
 
-
 {% endif %}
 
 
+
+
+
+{% if firmware %}
+
+
+<div class="result-card">
+
+
+<h2>Firmware Information</h2>
+
+
+<p>
+
+<b>Name:</b>
+
+{{ firmware.name }}
+
+</p>
+
+
+<p>
+
+<b>Size:</b>
+
+{{ firmware.size }} bytes
+
+</p>
+
+
+
+<p class="hash">
+
+<b>SHA256:</b>
+
+{{ firmware.sha256 }}
+
+</p>
+
+
+
+<p>
+
+<b>Scanned:</b>
+
+{{ firmware.scan_time }}
+
+</p>
+
+
+</div>
+
+
+{% endif %}
 
 
 
@@ -113,20 +308,18 @@ File Scanned:
 
 
 <h2>
-Risk Summary
-</h2>
 
+Risk Summary
+
+</h2>
 
 
 <div class="cards">
 
 
-
 <div class="card">
 
-<h1>
-{{ summary.total }}
-</h1>
+<h2>{{ summary.total }}</h2>
 
 <p>Total Issues</p>
 
@@ -134,13 +327,9 @@ Risk Summary
 
 
 
+<div class="card">
 
-
-<div class="card high">
-
-<h1>
-{{ summary.HIGH }}
-</h1>
+<h2>{{ summary.HIGH }}</h2>
 
 <p>High Severity</p>
 
@@ -148,13 +337,9 @@ Risk Summary
 
 
 
+<div class="card">
 
-
-<div class="card medium">
-
-<h1>
-{{ summary.MEDIUM }}
-</h1>
+<h2>{{ summary.MEDIUM }}</h2>
 
 <p>Medium Severity</p>
 
@@ -162,13 +347,9 @@ Risk Summary
 
 
 
+<div class="card">
 
-
-<div class="card low">
-
-<h1>
-{{ summary.LOW }}
-</h1>
+<h2>{{ summary.LOW }}</h2>
 
 <p>Low Severity</p>
 
@@ -179,10 +360,7 @@ Risk Summary
 </div>
 
 
-
 {% endif %}
-
-
 
 
 
@@ -193,7 +371,9 @@ Risk Summary
 
 
 <h2>
+
 Scan Results
+
 </h2>
 
 
@@ -201,14 +381,14 @@ Scan Results
 {% for item in results %}
 
 
-<div class="result">
+<div class="result-card">
 
 
-<h3>
+<h2>
 
-{{ item.finding.issue }}
+{{ item.finding.name }}
 
-</h3>
+</h2>
 
 
 
@@ -218,8 +398,8 @@ Scan Results
 
 {{ item.file }}
 
-
 </p>
+
 
 
 
@@ -228,17 +408,40 @@ Scan Results
 <b>Severity:</b>
 
 
-<span class="{{ item.finding.severity }}">
+{% if item.finding.severity == "HIGH" %}
 
 
-{{ item.finding.severity }}
+<span class="high">
 
+HIGH
 
 </span>
 
 
-</p>
+{% elif item.finding.severity == "MEDIUM" %}
 
+
+<span class="medium">
+
+MEDIUM
+
+</span>
+
+
+{% else %}
+
+
+<span class="low">
+
+LOW
+
+</span>
+
+
+{% endif %}
+
+
+</p>
 
 
 </div>
@@ -249,10 +452,10 @@ Scan Results
 
 
 
+<div class="download">
 
 
 <a href="/download">
-
 
 <button>
 
@@ -260,8 +463,10 @@ Download Security Report
 
 </button>
 
-
 </a>
+
+
+</div>
 
 
 
@@ -269,8 +474,8 @@ Download Security Report
 
 
 
-</div>
 
+</div>
 
 
 </body>

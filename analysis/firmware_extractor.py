@@ -1,5 +1,6 @@
 import os
 import subprocess
+import shutil
 
 
 def extract_firmware(file_path):
@@ -7,9 +8,17 @@ def extract_firmware(file_path):
     output_folder = "extracted_firmware"
 
 
-    if not os.path.exists(output_folder):
+    # remove old extraction data
+    if os.path.exists(output_folder):
 
-        os.makedirs(output_folder)
+        shutil.rmtree(
+            output_folder
+        )
+
+
+    os.makedirs(
+        output_folder
+    )
 
 
     try:
@@ -34,14 +43,10 @@ def extract_firmware(file_path):
 
     except Exception as error:
 
+
         print(
-            "Binwalk extraction failed:",
+            "Firmware extraction failed:",
             error
-        )
-
-
-        print(
-            "Using original uploaded file"
         )
 
 
