@@ -1,0 +1,5 @@
+Device firmware information
+
+openssl 1.0.1 installed
+
+debug=false

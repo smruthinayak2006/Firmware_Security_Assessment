@@ -2,7 +2,7 @@ import os
 
 from secret_detector import detect_secrets
 from config_analyzer import analyze_config
-
+from cve_checker import check_cve
 
 
 def analyze_file(file_path):
@@ -30,6 +30,12 @@ def analyze_file(file_path):
 
         findings.extend(
             analyze_config(content)
+        )
+
+        findings.extend(
+
+            check_cve(content)
+
         )
 
 

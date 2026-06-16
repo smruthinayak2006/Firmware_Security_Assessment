@@ -1,25 +1,11 @@
 [
     {
-        "file": "uploads\\test_firmware_config.txt",
+        "file": "uploads\\vulnerable_component.txt",
         "finding": {
-            "issue": "Hardcoded Password",
-            "severity": "HIGH",
-            "matches": [
-                "password=test123"
-            ]
-        }
-    },
-    {
-        "file": "uploads\\test_firmware_config.txt",
-        "finding": {
-            "issue": "Debug Mode Enabled",
-            "severity": "MEDIUM"
-        }
-    },
-    {
-        "file": "uploads\\test_firmware_config.txt",
-        "finding": {
-            "issue": "Telnet Enabled",
+            "issue": "Known Vulnerable Component",
+            "component": "openssl 1.0.1",
+            "cve": "CVE-2014-0160",
+            "name": "Heartbleed",
             "severity": "HIGH"
         }
     }

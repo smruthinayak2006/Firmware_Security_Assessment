@@ -120,22 +120,22 @@ Calculates:
 
 Completed:
 
-- Firmware upload dashboard
-- Recursive scanner engine
-- Secret detection module
-- Configuration security analysis
-- Risk classification system
-- SQLite vulnerability storage
-- JSON vulnerability reports
-- Binwalk firmware extraction support
+- Core scanner
+- Security modules
+- Flask integration
+- Upload workflow
+- Risk dashboard
+- Firmware extraction support
+- Firmware metadata extraction
+- Report generation
+- Database storage
 
 
 Upcoming:
 
-- PDF report generation
-- UI improvements
-- Final testing
-- Internship documentation
+- Advanced firmware analysis
+- CVE detection
+- Improved reporting 
 
 
 ## Author
