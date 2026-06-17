@@ -1,30 +1,58 @@
 import json
-import os
+
+from datetime import datetime
 
 
-
-def generate_report(results):
-
-
-    os.makedirs(
-        "reports",
-        exist_ok=True
-    )
+def generate_report(
+    results,
+    summary,
+    firmware,
+    firmware_hash
+):
 
 
-    report_path = "reports/security_report.json"
+    report = {
+
+
+        "report_information": {
+
+
+            "generated_time": str(
+                datetime.now()
+            ),
+
+
+            "tool": "Automated Firmware Security Assessment"
+
+
+        },
+
+
+        "firmware_information": firmware,
+
+
+        "firmware_integrity": firmware_hash,
+
+
+        "risk_summary": summary,
+
+
+        "vulnerabilities": results
+
+
+    }
 
 
 
     with open(
-        report_path,
+        "reports/security_report.json",
         "w"
     ) as file:
 
 
         json.dump(
 
-            results,
+            report,
 
             file,
 
@@ -33,4 +61,5 @@ def generate_report(results):
         )
 
 
-    return report_path     
+
+    return report

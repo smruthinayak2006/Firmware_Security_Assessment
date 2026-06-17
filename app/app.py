@@ -95,7 +95,12 @@ def scan():
 
 
 
-    generate_report(results)
+    generate_report(
+        results,
+        summary,
+        firmware_info,
+        firmware_hash
+    )
 
 
 

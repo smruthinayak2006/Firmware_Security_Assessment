@@ -1,12 +1,34 @@
-[
-    {
-        "file": "uploads\\vulnerable_component.txt",
-        "finding": {
-            "issue": "Known Vulnerable Component",
-            "component": "openssl 1.0.1",
-            "cve": "CVE-2014-0160",
-            "name": "Heartbleed",
-            "severity": "HIGH"
+{
+    "report_information": {
+        "generated_time": "2026-06-17 18:10:14.900962",
+        "tool": "Automated Firmware Security Assessment"
+    },
+    "firmware_information": {
+        "name": "vulnerable_component.txt",
+        "size": 69,
+        "scan_time": "2026-06-17 18:10:14",
+        "sha256": "170c267627b45162f4eeb2e04facf462c27665fa2e4e7ced6460b8b26a0246d3"
+    },
+    "firmware_integrity": {
+        "md5": "ddb9e3d3ab1071ce2d1f5f9a605ed693",
+        "sha256": "170c267627b45162f4eeb2e04facf462c27665fa2e4e7ced6460b8b26a0246d3"
+    },
+    "risk_summary": {
+        "total": 1,
+        "HIGH": 1,
+        "MEDIUM": 0,
+        "LOW": 0
+    },
+    "vulnerabilities": [
+        {
+            "file": "uploads\\vulnerable_component.txt",
+            "finding": {
+                "issue": "Known Vulnerable Component",
+                "component": "openssl 1.0.1",
+                "cve": "CVE-2014-0160",
+                "name": "Heartbleed",
+                "severity": "HIGH"
+            }
         }
-    }
-]
+    ]
+}
