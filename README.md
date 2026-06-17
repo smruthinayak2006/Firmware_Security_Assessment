@@ -20,6 +20,7 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Risk summary dashboard
 - Vulnerability report generation
 - Known vulnerability detection using CVE matching
+- Firmware integrity verification using MD5 and SHA256 hashing
 
 
 
@@ -91,6 +92,16 @@ Detects:
 - Severity level
 
 
+### Hash Analyzer
+
+Calculates firmware fingerprints for integrity verification.
+
+Generates:
+
+- MD5 hash
+- SHA256 hash
+
+
 ## Screenshots
 
 
@@ -127,6 +138,12 @@ Detects:
 ### CVE Detection
 
 ![CVE Detection](screenshots/day17_cve_detection.png)
+
+
+### Firmware Hash Integrity Analysis
+
+![Hash Analysis](screenshots/day18_firmware_hash_integrity.png)
+
 
 
 ## Current Status
