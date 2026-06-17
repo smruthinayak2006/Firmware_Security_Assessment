@@ -20,6 +20,8 @@ from report_generator import generate_report
 
 from firmware_analyzer import analyze_firmware
 
+from hash_analyzer import calculate_hash
+
 
 app = Flask(__name__)
 
@@ -73,6 +75,10 @@ def scan():
         file_path
     )
 
+    firmware_hash = calculate_hash(
+        file_path
+    )
+    
 
     extracted_path = extract_firmware(
         file_path
@@ -103,7 +109,9 @@ def scan():
 
         filename=uploaded_file.filename,
 
-        firmware=firmware_info
+        firmware=firmware_info,
+        
+        firmware_hash=firmware_hash
 
     )
 
