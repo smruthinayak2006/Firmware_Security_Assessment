@@ -19,6 +19,7 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Severity classification
 - Risk summary dashboard
 - Vulnerability report generation
+- Known vulnerability detection using CVE matching
 
 
 
@@ -79,8 +80,15 @@ Calculates:
 - Low severity issues
 
 
+### CVE Checker
 
-## Screenshots
+Detects vulnerable firmware components by comparing discovered software versions with a vulnerability database.
+
+Detects:
+
+- Vulnerable packages
+- CVE identifiers
+- Severity level
 
 
 ## Screenshots
@@ -114,6 +122,11 @@ Calculates:
 ### Vulnerability Scan Results
 
 ![Results](screenshots/day15_scan_results.png)
+
+
+### CVE Detection
+
+![CVE Detection](screenshots/day17_cve_detection.png)
 
 
 ## Current Status
