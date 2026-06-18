@@ -145,27 +145,38 @@ Generates:
 ![Hash Analysis](screenshots/day18_firmware_hash_integrity.png)
 
 
+### Firmware Scan History
+
+![Scan History](screenshots/day20_scan_history.png)
+
+
 
 ## Current Status
 
 Completed:
 
-- Core scanner
-- Security modules
-- Flask integration
-- Upload workflow
-- Risk dashboard
-- Firmware extraction support
-- Firmware metadata extraction
-- CVE vulnerability detection
-- Report generation
-- Database storage
+- Core firmware scanner engine
+- Firmware upload workflow
+- Flask security dashboard
+- Firmware extraction using Binwalk
+- Secret detection module
+- Insecure configuration detection
+- CVE simulation scanner
+- Firmware metadata analysis
+- MD5 and SHA256 integrity verification
+- Risk severity classification
+- JSON vulnerability report generation
+- SQLite database integration
+- Firmware scan history dashboard
+- Dark cybersecurity themed UI
+
 
 Upcoming:
 
-- CVE database expansion
-- Advanced firmware analysis
-- UI enhancements
+- User authentication and access control
+- Dashboard security improvements
+- Advanced vulnerability checks
+- Deployment preparation
 
 
 ## Author

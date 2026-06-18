@@ -1,43 +1,51 @@
-# System Architecture
+## Current System Architecture
 
 
-User
+Firmware Upload
+        |
+        v
+Firmware Analyzer
+        |
+        +----------------+
+        |                |
+        v                v
+ Metadata Extractor   Hash Analyzer
+                       (MD5/SHA256)
 
-↓
+        |
+        v
 
-Flask Dashboard
+Firmware Extractor
+(Binwalk)
 
-↓
-
-Firmware Upload Handler
-
-↓
-
-Binwalk Firmware Extractor
-
-↓
+        |
+        v
 
 Scanner Engine
 
+        |
++-------+-------+-------+
+|               |       |
+v               v       v
 
-Scanner connects to:
+Secret       Config     CVE
+Detector     Analyzer   Scanner
 
-- Secret Detector
-- Configuration Analyzer
-
-
-↓
+        |
+        v
 
 Risk Analyzer
 
-↓
+        |
++-------+----------+
+|                  |
+v                  v
 
-SQLite Database
+Report          Database
+Generator       Storage
 
-↓
+                   |
+                   v
 
-Report Generator
-
-↓
-
-Security Dashboard
+             Scan History
+             Dashboard
