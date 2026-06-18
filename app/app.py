@@ -1,5 +1,4 @@
-from flask import Flask, render_template, request, send_file
-
+from flask import Flask, render_template, request, send_file, redirect, session
 
 import os
 
@@ -12,7 +11,6 @@ sys.path.append(
     os.path.abspath("analysis")
 
 )
-
 
 
 
@@ -33,15 +31,88 @@ from database import save_results, get_scan_history
 
 
 
+
 app = Flask(__name__)
+
+
+
+app.secret_key = "firmware_security_secret_key"
 
 
 
 UPLOAD_FOLDER = "uploads"
 
 
-
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+
+
+
+
+@app.route("/login", methods=["GET", "POST"])
+
+
+def login():
+
+
+
+    if request.method == "POST":
+
+
+
+        username = request.form["username"]
+
+
+        password = request.form["password"]
+
+
+
+
+        if username == "admin" and password == "admin123":
+
+
+
+            session["logged_in"] = True
+
+
+
+            return redirect("/")
+
+
+
+
+    return render_template(
+
+        "login.html"
+
+    )
+
+
+
+
+
+
+
+
+@app.route("/logout")
+
+
+def logout():
+
+
+
+    session.clear()
+
+
+
+    return redirect(
+
+        "/login"
+
+    )
+
+
+
 
 
 
@@ -53,6 +124,20 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 def home():
+
+
+
+    if "logged_in" not in session:
+
+
+
+        return redirect(
+
+            "/login"
+
+        )
+
+
 
 
 
@@ -75,6 +160,9 @@ def home():
 
 
 
+
+
+
 @app.route("/scan", methods=["POST"])
 
 
@@ -82,7 +170,23 @@ def scan():
 
 
 
+    if "logged_in" not in session:
+
+
+
+        return redirect(
+
+            "/login"
+
+        )
+
+
+
+
+
+
     uploaded_file = request.files["firmware"]
+
 
 
 
@@ -94,6 +198,7 @@ def scan():
         uploaded_file.filename
 
     )
+
 
 
 
@@ -130,13 +235,11 @@ def scan():
 
 
 
-
     extracted_path = extract_firmware(
 
         file_path
 
     )
-
 
 
 
@@ -153,13 +256,11 @@ def scan():
 
 
 
-
     summary = calculate_risk_summary(
 
         results
 
     )
-
 
 
 
@@ -187,7 +288,6 @@ def scan():
         firmware_hash
 
     )
-
 
 
 
@@ -225,7 +325,22 @@ def history():
 
 
 
+    if "logged_in" not in session:
+
+
+
+        return redirect(
+
+            "/login"
+
+        )
+
+
+
+
+
     scan_history = get_scan_history()
+
 
 
 
@@ -246,10 +361,25 @@ def history():
 
 
 
+
 @app.route("/download")
 
 
 def download():
+
+
+
+    if "logged_in" not in session:
+
+
+
+        return redirect(
+
+            "/login"
+
+        )
+
+
 
 
 
@@ -260,6 +390,7 @@ def download():
         as_attachment=True
 
     )
+
 
 
 

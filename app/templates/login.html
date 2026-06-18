@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+
+<html>
+
+
+<head>
+
+<title>
+
+Admin Login
+
+</title>
+
+
+<link rel="stylesheet" href="/static/style.css">
+
+
+</head>
+
+
+
+
+<body>
+
+
+
+<div class="container login-container">
+
+
+
+<h1>
+
+🛡 Firmware Security Login
+
+</h1>
+
+
+
+<p>
+
+Authorized Access Only
+
+</p>
+
+
+
+
+
+<form method="POST" class="login-form">
+
+
+
+<input
+
+type="text"
+
+name="username"
+
+placeholder="Username"
+
+required
+
+>
+
+
+
+
+<div class="password-box">
+
+
+
+<input
+
+type="password"
+
+name="password"
+
+id="password"
+
+placeholder="Password"
+
+required
+
+>
+
+
+
+<span onclick="togglePassword()">
+
+👁
+
+</span>
+
+
+
+</div>
+
+
+
+
+
+<button type="submit">
+
+Login
+
+</button>
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+<script>
+
+
+function togglePassword(){
+
+
+    let password = document.getElementById(
+        "password"
+    )
+
+
+    if(password.type === "password"){
+
+
+        password.type = "text"
+
+
+    }
+
+
+    else{
+
+
+        password.type = "password"
+
+
+    }
+
+
+}
+
+
+</script>
+
+
+
+
+
+</body>
+
+
+</html>

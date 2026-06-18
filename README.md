@@ -149,6 +149,9 @@ Generates:
 
 ![Scan History](screenshots/day20_scan_history_dashboard.png)
 
+### Admin Authentication
+
+![Login](screenshots/day21_login_authentication.png)
 
 
 ## Current Status
@@ -169,7 +172,9 @@ Completed:
 - SQLite database integration
 - Firmware scan history dashboard
 - Dark cybersecurity themed UI
-
+- Admin authentication system
+- Session based dashboard protection
+- Secure login and logout workflow
 
 Upcoming:
 

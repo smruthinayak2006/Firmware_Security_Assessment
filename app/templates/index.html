@@ -17,10 +17,46 @@
 <div class="container">
 
 
-<h1>🛡 Automated Firmware Security Assessment</h1>
+<a href="/logout">
+
+<button>
+
+Logout
+
+</button>
+
+</a>
 
 
-<p>IoT Firmware Vulnerability Scanner</p>
+<a href="/history">
+
+<button>
+
+Scan History
+
+</button>
+
+</a>
+
+
+
+
+
+<h1>
+
+🛡 Automated Firmware Security Assessment
+
+</h1>
+
+
+
+<p>
+
+IoT Firmware Vulnerability Scanner
+
+</p>
+
+
 
 
 
@@ -43,13 +79,20 @@ Start Security Scan
 
 
 
+
+
 {% if filename %}
 
 
 <div class="success">
 
 
-<h2>✅ Scan Completed Successfully</h2>
+<h2>
+
+✅ Scan Completed Successfully
+
+</h2>
+
 
 
 <p>
@@ -71,40 +114,26 @@ File Scanned:
 
 
 
+
+
 {% if firmware %}
 
 
-<h2>Firmware Information</h2>
+<h2>
+
+Firmware Information
+
+</h2>
 
 
 <div class="card">
 
 
-<p>
+<p><b>Name:</b> {{ firmware.name }}</p>
 
-<b>Name:</b>
+<p><b>Size:</b> {{ firmware.size }}</p>
 
-{{ firmware.name }}
-
-</p>
-
-
-<p>
-
-<b>Size:</b>
-
-{{ firmware.size }}
-
-</p>
-
-
-<p>
-
-<b>Type:</b>
-
-{{ firmware.type }}
-
-</p>
+<p><b>Type:</b> {{ firmware.type }}</p>
 
 
 </div>
@@ -117,34 +146,46 @@ File Scanned:
 
 
 
+
+
 {% if firmware_hash %}
 
 
-<h2>Firmware Integrity</h2>
+
+<h2>
+
+Firmware Integrity
+
+</h2>
+
 
 
 <div class="card">
 
 
+
 <p>
 
-<b>MD5 Hash:</b>
+<b>MD5:</b>
 
 {{ firmware_hash.md5 }}
 
 </p>
 
 
+
 <p>
 
-<b>SHA256 Hash:</b>
+<b>SHA256:</b>
 
 {{ firmware_hash.sha256 }}
 
 </p>
 
 
+
 </div>
+
 
 
 {% endif %}
@@ -159,10 +200,16 @@ File Scanned:
 {% if summary %}
 
 
-<h2>Risk Summary</h2>
+<h2>
+
+Risk Summary
+
+</h2>
+
 
 
 <div class="summary">
+
 
 
 <div class="box">
@@ -219,14 +266,21 @@ File Scanned:
 
 
 
+
+
 {% if results %}
 
 
-<h2>Scan Results</h2>
+<h2>
+
+Scan Results
+
+</h2>
 
 
 
 {% for item in results %}
+
 
 
 <div class="result-card">
@@ -270,17 +324,20 @@ File Scanned:
 
 <a href="/download">
 
+
 <button>
 
 Download Security Report
 
 </button>
 
+
 </a>
 
 
 
 {% endif %}
+
 
 
 

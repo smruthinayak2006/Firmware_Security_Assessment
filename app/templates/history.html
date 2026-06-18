@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 
-
 <html>
-
 
 <head>
 
-
-<title>
-
-Scan History
-
-</title>
-
-
+<title>Scan History</title>
 
 <link rel="stylesheet" href="/static/style.css">
 
-
-
 </head>
-
 
 
 <body>
 
 
-
 <div class="container">
+
+
+<a href="/logout">
+
+<button>
+
+Logout
+
+</button>
+
+</a>
+
 
 
 
@@ -41,7 +40,6 @@ Firmware Scan History
 
 
 
-
 {% if history %}
 
 
@@ -49,62 +47,19 @@ Firmware Scan History
 {% for scan in history %}
 
 
-
-
 <div class="result-card">
 
 
+<p><b>Firmware:</b> {{ scan[0] }}</p>
 
-<p>
+<p><b>Issue:</b> {{ scan[1] }}</p>
 
-<b>Firmware:</b>
+<p><b>Severity:</b> {{ scan[2] }}</p>
 
-{{ scan[0] }}
-
-</p>
-
-
-
-
-
-<p>
-
-<b>Issue:</b>
-
-{{ scan[1] }}
-
-</p>
-
-
-
-
-
-<p>
-
-<b>Severity:</b>
-
-{{ scan[2] }}
-
-</p>
-
-
-
-
-
-<p>
-
-<b>Scanned:</b>
-
-{{ scan[3] }}
-
-</p>
-
-
+<p><b>Scanned:</b> {{ scan[3] }}</p>
 
 
 </div>
-
-
 
 
 
@@ -117,12 +72,7 @@ Firmware Scan History
 
 
 
-<h2>
-
-No Previous Scans Found
-
-</h2>
-
+<h2>No Previous Scans Found</h2>
 
 
 
@@ -131,9 +81,7 @@ No Previous Scans Found
 
 
 
-
 <a href="/">
-
 
 <button>
 
@@ -141,9 +89,7 @@ Back Dashboard
 
 </button>
 
-
 </a>
-
 
 
 
@@ -151,8 +97,6 @@ Back Dashboard
 </div>
 
 
-
 </body>
-
 
 </html>
