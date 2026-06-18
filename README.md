@@ -147,7 +147,7 @@ Generates:
 
 ### Firmware Scan History
 
-![Scan History](screenshots/day20_scan_history.png)
+![Scan History](screenshots/day20_scan_history_dashboard.png)
 
 
 
