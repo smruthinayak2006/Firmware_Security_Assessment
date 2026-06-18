@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+
+
+<html>
+
+
+<head>
+
+
+<title>
+
+Scan History
+
+</title>
+
+
+
+<link rel="stylesheet" href="/static/style.css">
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="container">
+
+
+
+<h1>
+
+Firmware Scan History
+
+</h1>
+
+
+
+
+
+
+{% if history %}
+
+
+
+{% for scan in history %}
+
+
+
+
+<div class="result-card">
+
+
+
+<p>
+
+<b>Firmware:</b>
+
+{{ scan[0] }}
+
+</p>
+
+
+
+
+
+<p>
+
+<b>Issue:</b>
+
+{{ scan[1] }}
+
+</p>
+
+
+
+
+
+<p>
+
+<b>Severity:</b>
+
+{{ scan[2] }}
+
+</p>
+
+
+
+
+
+<p>
+
+<b>Scanned:</b>
+
+{{ scan[3] }}
+
+</p>
+
+
+
+
+</div>
+
+
+
+
+
+{% endfor %}
+
+
+
+
+{% else %}
+
+
+
+<h2>
+
+No Previous Scans Found
+
+</h2>
+
+
+
+
+{% endif %}
+
+
+
+
+
+<a href="/">
+
+
+<button>
+
+Back Dashboard
+
+</button>
+
+
+</a>
+
+
+
+
+
+</div>
+
+
+
+</body>
+
+
+</html>
