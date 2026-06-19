@@ -28,6 +28,8 @@ from hash_analyzer import calculate_hash
 
 from database import save_results, get_scan_history
 
+from risk_score import calculate_security_score
+
 
 
 
@@ -44,6 +46,9 @@ UPLOAD_FOLDER = "uploads"
 
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+
+
 
 
 
@@ -75,8 +80,8 @@ def login():
             session["logged_in"] = True
 
 
-
             return redirect("/")
+
 
 
 
@@ -86,6 +91,9 @@ def login():
         "login.html"
 
     )
+
+
+
 
 
 
@@ -120,6 +128,7 @@ def logout():
 
 
 
+
 @app.route("/")
 
 
@@ -141,6 +150,7 @@ def home():
 
 
 
+
     return render_template(
 
         "index.html",
@@ -149,7 +159,9 @@ def home():
 
         summary=None,
 
-        filename=None
+        filename=None,
+
+        score=None
 
     )
 
@@ -185,6 +197,7 @@ def scan():
 
 
 
+
     uploaded_file = request.files["firmware"]
 
 
@@ -198,6 +211,7 @@ def scan():
         uploaded_file.filename
 
     )
+
 
 
 
@@ -245,11 +259,13 @@ def scan():
 
 
 
+
     results = scan_firmware(
 
         extracted_path
 
     )
+
 
 
 
@@ -266,11 +282,23 @@ def scan():
 
 
 
+    security_score = calculate_security_score(
+
+        results
+
+    )
+
+
+
+
+
+
     save_results(
 
         results
 
     )
+
 
 
 
@@ -294,6 +322,9 @@ def scan():
 
 
 
+
+
+
     return render_template(
 
         "index.html",
@@ -306,7 +337,9 @@ def scan():
 
         firmware=firmware_info,
 
-        firmware_hash=firmware_hash
+        firmware_hash=firmware_hash,
+
+        score=security_score
 
     )
 
@@ -334,6 +367,7 @@ def history():
             "/login"
 
         )
+
 
 
 
@@ -390,6 +424,8 @@ def download():
         as_attachment=True
 
     )
+
+
 
 
 

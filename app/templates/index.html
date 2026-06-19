@@ -17,28 +17,9 @@
 <div class="container">
 
 
-<a href="/logout">
+<a href="/logout"><button>Logout</button></a>
 
-<button>
-
-Logout
-
-</button>
-
-</a>
-
-
-<a href="/history">
-
-<button>
-
-Scan History
-
-</button>
-
-</a>
-
-
+<a href="/history"><button>Scan History</button></a>
 
 
 
@@ -47,7 +28,6 @@ Scan History
 🛡 Automated Firmware Security Assessment
 
 </h1>
-
 
 
 <p>
@@ -80,7 +60,6 @@ Start Security Scan
 
 
 
-
 {% if filename %}
 
 
@@ -92,7 +71,6 @@ Start Security Scan
 ✅ Scan Completed Successfully
 
 </h2>
-
 
 
 <p>
@@ -115,15 +93,10 @@ File Scanned:
 
 
 
-
 {% if firmware %}
 
 
-<h2>
-
-Firmware Information
-
-</h2>
+<h2>Firmware Information</h2>
 
 
 <div class="card">
@@ -147,28 +120,58 @@ Firmware Information
 
 
 
-
 {% if firmware_hash %}
 
 
-
-<h2>
-
-Firmware Integrity
-
-</h2>
-
+<h2>Firmware Integrity</h2>
 
 
 <div class="card">
 
 
+<p><b>MD5:</b> {{ firmware_hash.md5 }}</p>
+
+
+<p><b>SHA256:</b> {{ firmware_hash.sha256 }}</p>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+
+
+
+
+{% if score %}
+
+
+<h2>
+
+Firmware Security Score
+
+</h2>
+
+
+<div class="card">
+
+
+<h2>
+
+{{ score.risk_score }}/100
+
+</h2>
+
+
 
 <p>
 
-<b>MD5:</b>
+<b>Raw Risk Points:</b>
 
-{{ firmware_hash.md5 }}
+{{ score.raw_score }}
 
 </p>
 
@@ -176,12 +179,11 @@ Firmware Integrity
 
 <p>
 
-<b>SHA256:</b>
+<b>Risk Level:</b>
 
-{{ firmware_hash.sha256 }}
+{{ score.risk_level }}
 
 </p>
-
 
 
 </div>
@@ -197,19 +199,14 @@ Firmware Integrity
 
 
 
+
 {% if summary %}
 
 
-<h2>
-
-Risk Summary
-
-</h2>
-
+<h2>Risk Summary</h2>
 
 
 <div class="summary">
-
 
 
 <div class="box">
@@ -219,7 +216,6 @@ Risk Summary
 <p>Total Issues</p>
 
 </div>
-
 
 
 
@@ -233,7 +229,6 @@ Risk Summary
 
 
 
-
 <div class="box medium">
 
 <h3>{{ summary.MEDIUM }}</h3>
@@ -241,7 +236,6 @@ Risk Summary
 <p>Medium Severity</p>
 
 </div>
-
 
 
 
@@ -266,32 +260,20 @@ Risk Summary
 
 
 
-
-
 {% if results %}
 
 
-<h2>
-
-Scan Results
-
-</h2>
+<h2>Scan Results</h2>
 
 
 
 {% for item in results %}
 
 
-
 <div class="result-card">
 
 
-<h3>
-
-{{ item.finding.issue }}
-
-</h3>
-
+<h3>{{ item.finding.issue }}</h3>
 
 
 <p>
@@ -303,7 +285,6 @@ Scan Results
 </p>
 
 
-
 <p>
 
 <b>Severity:</b>
@@ -313,9 +294,7 @@ Scan Results
 </p>
 
 
-
 </div>
-
 
 
 {% endfor %}
@@ -337,6 +316,7 @@ Download Security Report
 
 
 {% endif %}
+
 
 
 
