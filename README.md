@@ -21,7 +21,10 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Vulnerability report generation
 - Known vulnerability detection using CVE matching
 - Firmware integrity verification using MD5 and SHA256 hashing
-
+- Firmware risk scoring engine
+- Numerical vulnerability prioritization
+- SOC style security dashboard
+- Risk visualization meter
 
 
 ## Technology Stack
@@ -101,6 +104,23 @@ Generates:
 - MD5 hash
 - SHA256 hash
 
+### Risk Scoring Engine
+
+Calculates firmware security exposure using severity based scoring.
+
+Severity weights:
+
+- High vulnerabilities
+- Medium vulnerabilities
+- Low vulnerabilities
+
+
+Generates:
+
+- Firmware risk score
+- Risk level classification
+- Remediation priority
+
 
 ## Screenshots
 
@@ -158,23 +178,19 @@ Generates:
 
 Completed:
 
-- Core firmware scanner engine
-- Firmware upload workflow
-- Flask security dashboard
-- Firmware extraction using Binwalk
-- Secret detection module
-- Insecure configuration detection
-- CVE simulation scanner
-- Firmware metadata analysis
-- MD5 and SHA256 integrity verification
-- Risk severity classification
-- JSON vulnerability report generation
-- SQLite database integration
-- Firmware scan history dashboard
-- Dark cybersecurity themed UI
-- Admin authentication system
-- Session based dashboard protection
-- Secure login and logout workflow
+Completed:
+
+- Core scanner
+- Security modules
+- Flask integration
+- Upload workflow
+- Risk dashboard
+- Firmware metadata extraction
+- Hash based integrity verification
+- Scan history storage
+- Authentication system
+- Firmware risk scoring engine
+- SOC style dashboard UI
 
 Upcoming:
 

@@ -17,9 +17,26 @@
 <div class="container">
 
 
-<a href="/logout"><button>Logout</button></a>
+<a href="/logout">
 
-<a href="/history"><button>Scan History</button></a>
+<button>
+
+Logout
+
+</button>
+
+</a>
+
+
+<a href="/history">
+
+<button>
+
+Scan History
+
+</button>
+
+</a>
 
 
 
@@ -28,6 +45,7 @@
 🛡 Automated Firmware Security Assessment
 
 </h1>
+
 
 
 <p>
@@ -66,11 +84,7 @@ Start Security Scan
 <div class="success">
 
 
-<h2>
-
-✅ Scan Completed Successfully
-
-</h2>
+<h2>✅ Scan Completed Successfully</h2>
 
 
 <p>
@@ -120,6 +134,7 @@ File Scanned:
 
 
 
+
 {% if firmware_hash %}
 
 
@@ -129,16 +144,29 @@ File Scanned:
 <div class="card">
 
 
-<p><b>MD5:</b> {{ firmware_hash.md5 }}</p>
+<p>
+
+<b>MD5:</b>
+
+{{ firmware_hash.md5 }}
+
+</p>
 
 
-<p><b>SHA256:</b> {{ firmware_hash.sha256 }}</p>
+<p>
+
+<b>SHA256:</b>
+
+{{ firmware_hash.sha256 }}
+
+</p>
 
 
 </div>
 
 
 {% endif %}
+
 
 
 
@@ -156,34 +184,65 @@ Firmware Security Score
 </h2>
 
 
-<div class="card">
+
+<div class="score-card">
 
 
-<h2>
+<div class="score-number">
 
-{{ score.risk_score }}/100
 
-</h2>
+{{ score.risk_score }}
+
+<span>
+
+/100
+
+</span>
+
+
+</div>
+
+
+
+
+<h3>
+
+{{ score.risk_level }} RISK
+
+</h3>
+
+
+
+
+
+<div class="progress">
+
+
+<div class="progress-fill"
+
+style="width: {{ score.risk_score }}%;">
+
+</div>
+
+
+</div>
+
 
 
 
 <p>
 
-<b>Raw Risk Points:</b>
+Raw Risk Points:
+
+<b>
 
 {{ score.raw_score }}
 
+</b>
+
+
 </p>
 
-
-
-<p>
-
-<b>Risk Level:</b>
-
-{{ score.risk_level }}
-
-</p>
 
 
 </div>
@@ -203,53 +262,77 @@ Firmware Security Score
 {% if summary %}
 
 
-<h2>Risk Summary</h2>
+<h2>
+
+Risk Summary
+
+</h2>
+
 
 
 <div class="summary">
 
 
+
 <div class="box">
+
 
 <h3>{{ summary.total }}</h3>
 
 <p>Total Issues</p>
 
+
 </div>
+
+
 
 
 
 <div class="box high">
 
+
 <h3>{{ summary.HIGH }}</h3>
 
 <p>High Severity</p>
 
+
 </div>
+
+
+
 
 
 
 <div class="box medium">
 
+
 <h3>{{ summary.MEDIUM }}</h3>
 
 <p>Medium Severity</p>
 
+
 </div>
+
+
+
 
 
 
 <div class="box low">
 
+
 <h3>{{ summary.LOW }}</h3>
 
 <p>Low Severity</p>
 
-</div>
-
-
 
 </div>
+
+
+
+
+</div>
+
 
 
 {% endif %}
@@ -260,20 +343,33 @@ Firmware Security Score
 
 
 
+
 {% if results %}
 
 
-<h2>Scan Results</h2>
+
+<h2>
+
+Scan Results
+
+</h2>
+
 
 
 
 {% for item in results %}
 
 
+
 <div class="result-card">
 
 
-<h3>{{ item.finding.issue }}</h3>
+<h3>
+
+{{ item.finding.issue }}
+
+</h3>
+
 
 
 <p>
@@ -285,6 +381,7 @@ Firmware Security Score
 </p>
 
 
+
 <p>
 
 <b>Severity:</b>
@@ -294,10 +391,14 @@ Firmware Security Score
 </p>
 
 
+
 </div>
 
 
+
 {% endfor %}
+
+
 
 
 
@@ -315,13 +416,14 @@ Download Security Report
 
 
 
+
 {% endif %}
 
 
 
 
-
 </div>
+
 
 
 </body>
