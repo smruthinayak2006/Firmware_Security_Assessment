@@ -3,51 +3,115 @@ import json
 from datetime import datetime
 
 
+
+
+
 def generate_report(
+
     results,
+
     summary,
+
     firmware,
-    firmware_hash
+
+    firmware_hash,
+
+    security_score
+
 ):
+
+
 
 
     report = {
 
 
+
+
         "report_information": {
 
 
+
             "generated_time": str(
+
                 datetime.now()
+
             ),
 
 
-            "tool": "Automated Firmware Security Assessment"
+
+
+            "tool": "Automated Firmware Security Assessment",
+
+
+
+            "report_type": "IoT Firmware Security Analysis"
+
 
 
         },
 
 
+
+
+
         "firmware_information": firmware,
+
+
+
 
 
         "firmware_integrity": firmware_hash,
 
 
+
+
+
         "risk_summary": summary,
 
 
-        "vulnerabilities": results
+
+
+
+        "firmware_risk_score": security_score,
+
+
+
+
+
+        "vulnerabilities": results,
+
+
+
+
+
+        "security_recommendation": (
+
+            "Review detected vulnerabilities, apply recommended fixes, "
+
+            "and verify firmware before deployment."
+
+        )
+
+
 
 
     }
 
 
 
+
+
+
     with open(
+
         "reports/security_report.json",
+
         "w"
+
     ) as file:
+
+
 
 
         json.dump(
@@ -59,6 +123,9 @@ def generate_report(
             indent=4
 
         )
+
+
+
 
 
 

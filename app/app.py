@@ -55,6 +55,7 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 
+
 @app.route("/login", methods=["GET", "POST"])
 
 
@@ -75,6 +76,7 @@ def login():
 
 
 
+
         if username == "admin" and password == "admin123":
 
 
@@ -89,11 +91,13 @@ def login():
 
 
 
+
     return render_template(
 
         "login.html"
 
     )
+
 
 
 
@@ -130,6 +134,7 @@ def logout():
 
 
 
+
 @app.route("/")
 
 
@@ -152,6 +157,7 @@ def home():
 
 
 
+
     return render_template(
 
         "index.html",
@@ -165,6 +171,7 @@ def home():
         score=None
 
     )
+
 
 
 
@@ -197,7 +204,9 @@ def scan():
 
 
 
+
     uploaded_file = request.files["firmware"]
+
 
 
 
@@ -216,11 +225,14 @@ def scan():
 
 
 
+
     uploaded_file.save(
 
         file_path
 
     )
+
+
 
 
 
@@ -237,11 +249,14 @@ def scan():
 
 
 
+
     firmware_hash = calculate_hash(
 
         file_path
 
     )
+
+
 
 
 
@@ -259,6 +274,8 @@ def scan():
 
 
 
+
+
     results = scan_firmware(
 
         extracted_path
@@ -269,11 +286,15 @@ def scan():
 
 
 
+
+
     results = generate_recommendations(
 
         results
 
     )
+
+
 
 
 
@@ -293,11 +314,15 @@ def scan():
 
 
 
+
+
     security_score = calculate_security_score(
 
         results
 
     )
+
+
 
 
 
@@ -318,6 +343,9 @@ def scan():
 
 
 
+
+
+
     generate_report(
 
         results,
@@ -326,9 +354,13 @@ def scan():
 
         firmware_info,
 
-        firmware_hash
+        firmware_hash,
+
+        security_score
 
     )
+
+
 
 
 
@@ -365,6 +397,8 @@ def scan():
 
 
 
+
+
 @app.route("/history")
 
 
@@ -388,7 +422,10 @@ def history():
 
 
 
+
     scan_history = get_scan_history()
+
+
 
 
 
@@ -402,6 +439,7 @@ def history():
         history=scan_history
 
     )
+
 
 
 
@@ -434,6 +472,7 @@ def download():
 
 
 
+
     return send_file(
 
         "../reports/security_report.json",
@@ -441,6 +480,8 @@ def download():
         as_attachment=True
 
     )
+
+
 
 
 

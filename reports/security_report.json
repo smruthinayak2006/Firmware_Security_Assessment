@@ -1,12 +1,13 @@
 {
     "report_information": {
-        "generated_time": "2026-06-20 09:08:38.571545",
-        "tool": "Automated Firmware Security Assessment"
+        "generated_time": "2026-06-20 18:51:05.074886",
+        "tool": "Automated Firmware Security Assessment",
+        "report_type": "IoT Firmware Security Analysis"
     },
     "firmware_information": {
         "name": "vulnerable_component.txt",
         "size": 69,
-        "scan_time": "2026-06-20 09:08:38",
+        "scan_time": "2026-06-20 18:51:05",
         "sha256": "170c267627b45162f4eeb2e04facf462c27665fa2e4e7ced6460b8b26a0246d3"
     },
     "firmware_integrity": {
@@ -18,6 +19,11 @@
         "HIGH": 1,
         "MEDIUM": 0,
         "LOW": 0
+    },
+    "firmware_risk_score": {
+        "raw_score": 30,
+        "risk_score": 30,
+        "risk_level": "MEDIUM"
     },
     "vulnerabilities": [
         {
@@ -31,5 +37,6 @@
             },
             "recommendation": "Update vulnerable software components to patched versions."
         }
-    ]
+    ],
+    "security_recommendation": "Review detected vulnerabilities, apply recommended fixes, and verify firmware before deployment."
 }
