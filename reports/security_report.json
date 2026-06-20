@@ -1,12 +1,12 @@
 {
     "report_information": {
-        "generated_time": "2026-06-19 19:03:33.170005",
+        "generated_time": "2026-06-20 09:08:38.571545",
         "tool": "Automated Firmware Security Assessment"
     },
     "firmware_information": {
         "name": "vulnerable_component.txt",
         "size": 69,
-        "scan_time": "2026-06-19 19:03:33",
+        "scan_time": "2026-06-20 09:08:38",
         "sha256": "170c267627b45162f4eeb2e04facf462c27665fa2e4e7ced6460b8b26a0246d3"
     },
     "firmware_integrity": {
@@ -28,7 +28,8 @@
                 "cve": "CVE-2014-0160",
                 "name": "Heartbleed",
                 "severity": "HIGH"
-            }
+            },
+            "recommendation": "Update vulnerable software components to patched versions."
         }
     ]
 }

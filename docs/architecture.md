@@ -1,22 +1,20 @@
-## Current System Architecture
-
-
 Firmware Upload
         |
         v
+
 Firmware Analyzer
         |
         +----------------+
         |                |
         v                v
- Metadata Extractor   Hash Analyzer
-                       (MD5/SHA256)
+
+Metadata Extraction     Hash Calculation
+                         (MD5 + SHA256)
 
         |
         v
 
-Firmware Extractor
-(Binwalk)
+Binwalk Extractor
 
         |
         v
@@ -24,28 +22,31 @@ Firmware Extractor
 Scanner Engine
 
         |
-+-------+-------+-------+
-|               |       |
-v               v       v
+        +-------------+-------------+
+        |             |             |
+        v             v             v
 
-Secret       Config     CVE
-Detector     Analyzer   Scanner
+Secret Detector   Config Analyzer   CVE Checker
+
+        |
+        v
+
+Remediation Engine
 
         |
         v
 
 Risk Analyzer
+        |
+        v
+
+Risk Score Engine
+        |
+        v
+
+Database Storage
 
         |
-+-------+----------+
-|                  |
-v                  v
+        v
 
-Report          Database
-Generator       Storage
-
-                   |
-                   v
-
-             Scan History
-             Dashboard
+Report Generator + Dashboard

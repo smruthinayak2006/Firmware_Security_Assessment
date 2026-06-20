@@ -30,6 +30,8 @@ from database import save_results, get_scan_history
 
 from risk_score import calculate_security_score
 
+from remediation import generate_recommendations
+
 
 
 
@@ -46,7 +48,6 @@ UPLOAD_FOLDER = "uploads"
 
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
-
 
 
 
@@ -73,11 +74,13 @@ def login():
 
 
 
+
         if username == "admin" and password == "admin123":
 
 
 
             session["logged_in"] = True
+
 
 
             return redirect("/")
@@ -91,7 +94,6 @@ def login():
         "login.html"
 
     )
-
 
 
 
@@ -118,7 +120,6 @@ def logout():
         "/login"
 
     )
-
 
 
 
@@ -164,8 +165,6 @@ def home():
         score=None
 
     )
-
-
 
 
 
@@ -270,6 +269,17 @@ def scan():
 
 
 
+    results = generate_recommendations(
+
+        results
+
+    )
+
+
+
+
+
+
 
 
     summary = calculate_risk_summary(
@@ -277,6 +287,7 @@ def scan():
         results
 
     )
+
 
 
 
@@ -293,11 +304,13 @@ def scan():
 
 
 
+
     save_results(
 
         results
 
     )
+
 
 
 
@@ -351,6 +364,7 @@ def scan():
 
 
 
+
 @app.route("/history")
 
 
@@ -373,7 +387,9 @@ def history():
 
 
 
+
     scan_history = get_scan_history()
+
 
 
 
@@ -412,6 +428,7 @@ def download():
             "/login"
 
         )
+
 
 
 

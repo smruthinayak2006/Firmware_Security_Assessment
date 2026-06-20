@@ -17,6 +17,7 @@
 <div class="container">
 
 
+
 <a href="/logout">
 
 <button>
@@ -26,6 +27,7 @@ Logout
 </button>
 
 </a>
+
 
 
 <a href="/history">
@@ -40,11 +42,15 @@ Scan History
 
 
 
+
+
+
 <h1>
 
 🛡 Automated Firmware Security Assessment
 
 </h1>
+
 
 
 
@@ -58,10 +64,14 @@ IoT Firmware Vulnerability Scanner
 
 
 
+
+
 <form action="/scan" method="POST" enctype="multipart/form-data">
 
 
+
 <input type="file" name="firmware" required>
+
 
 
 <button type="submit">
@@ -71,7 +81,11 @@ Start Security Scan
 </button>
 
 
+
 </form>
+
+
+
 
 
 
@@ -84,7 +98,13 @@ Start Security Scan
 <div class="success">
 
 
-<h2>✅ Scan Completed Successfully</h2>
+
+<h2>
+
+✅ Scan Completed Successfully
+
+</h2>
+
 
 
 <p>
@@ -96,10 +116,15 @@ File Scanned:
 </p>
 
 
+
 </div>
 
 
+
 {% endif %}
+
+
+
 
 
 
@@ -110,23 +135,35 @@ File Scanned:
 {% if firmware %}
 
 
-<h2>Firmware Information</h2>
+
+<h2>
+
+Firmware Information
+
+</h2>
+
 
 
 <div class="card">
 
 
+
 <p><b>Name:</b> {{ firmware.name }}</p>
+
 
 <p><b>Size:</b> {{ firmware.size }}</p>
 
+
 <p><b>Type:</b> {{ firmware.type }}</p>
+
 
 
 </div>
 
 
+
 {% endif %}
+
 
 
 
@@ -138,10 +175,18 @@ File Scanned:
 {% if firmware_hash %}
 
 
-<h2>Firmware Integrity</h2>
+
+<h2>
+
+Firmware Integrity
+
+</h2>
+
+
 
 
 <div class="card">
+
 
 
 <p>
@@ -153,6 +198,8 @@ File Scanned:
 </p>
 
 
+
+
 <p>
 
 <b>SHA256:</b>
@@ -162,7 +209,9 @@ File Scanned:
 </p>
 
 
+
 </div>
+
 
 
 {% endif %}
@@ -174,7 +223,9 @@ File Scanned:
 
 
 
+
 {% if score %}
+
 
 
 <h2>
@@ -185,13 +236,16 @@ Firmware Security Score
 
 
 
+
 <div class="score-card">
+
 
 
 <div class="score-number">
 
 
 {{ score.risk_score }}
+
 
 <span>
 
@@ -200,7 +254,9 @@ Firmware Security Score
 </span>
 
 
+
 </div>
+
 
 
 
@@ -215,17 +271,22 @@ Firmware Security Score
 
 
 
+
 <div class="progress">
+
 
 
 <div class="progress-fill"
 
 style="width: {{ score.risk_score }}%;">
 
+
 </div>
 
 
+
 </div>
+
 
 
 
@@ -245,7 +306,9 @@ Raw Risk Points:
 
 
 
+
 </div>
+
 
 
 
@@ -262,6 +325,7 @@ Raw Risk Points:
 {% if summary %}
 
 
+
 <h2>
 
 Risk Summary
@@ -270,7 +334,9 @@ Risk Summary
 
 
 
+
 <div class="summary">
+
 
 
 
@@ -302,7 +368,6 @@ Risk Summary
 
 
 
-
 <div class="box medium">
 
 
@@ -312,7 +377,6 @@ Risk Summary
 
 
 </div>
-
 
 
 
@@ -335,7 +399,11 @@ Risk Summary
 
 
 
+
 {% endif %}
+
+
+
 
 
 
@@ -348,6 +416,7 @@ Risk Summary
 
 
 
+
 <h2>
 
 Scan Results
@@ -357,11 +426,16 @@ Scan Results
 
 
 
+
 {% for item in results %}
 
 
 
+
 <div class="result-card">
+
+
+
 
 
 <h3>
@@ -369,6 +443,8 @@ Scan Results
 {{ item.finding.issue }}
 
 </h3>
+
+
 
 
 
@@ -382,6 +458,9 @@ Scan Results
 
 
 
+
+
+
 <p>
 
 <b>Severity:</b>
@@ -392,7 +471,27 @@ Scan Results
 
 
 
+
+
+
+
+<p>
+
+<b>Recommended Fix:</b>
+
+<br>
+
+{{ item.recommendation }}
+
+</p>
+
+
+
+
+
 </div>
+
+
 
 
 
@@ -402,7 +501,12 @@ Scan Results
 
 
 
+
+
+
+
 <a href="/download">
+
 
 
 <button>
@@ -412,12 +516,16 @@ Download Security Report
 </button>
 
 
+
 </a>
 
 
 
 
+
+
 {% endif %}
+
 
 
 

@@ -25,6 +25,9 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Numerical vulnerability prioritization
 - SOC style security dashboard
 - Risk visualization meter
+- Firmware vulnerability remediation recommendations
+- Security fix guidance for detected issues
+- Patch and mitigation suggestion engine
 
 
 ## Technology Stack
@@ -120,6 +123,16 @@ Generates:
 - Firmware risk score
 - Risk level classification
 - Remediation priority
+
+### Remediation Engine
+
+Provides recommended security actions for detected firmware vulnerabilities.
+
+Supports:
+
+- Hardcoded credential fixes
+- Insecure service mitigation
+- Vulnerable component patch guidance
 
 
 ## Screenshots
