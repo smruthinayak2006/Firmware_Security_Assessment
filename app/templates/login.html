@@ -65,6 +65,7 @@ required
 
 
 
+
 <div class="password-box">
 
 
@@ -85,7 +86,11 @@ required
 
 
 
-<span onclick="togglePassword()">
+
+<span 
+id="eye-icon"
+onclick="togglePassword()"
+>
 
 👁
 
@@ -93,7 +98,9 @@ required
 
 
 
+
 </div>
+
 
 
 
@@ -108,11 +115,13 @@ Login
 
 
 
+
 </form>
 
 
 
 </div>
+
 
 
 
@@ -130,19 +139,33 @@ function togglePassword(){
     )
 
 
+    let icon = document.getElementById(
+        "eye-icon"
+    )
+
+
+
+
     if(password.type === "password"){
 
 
         password.type = "text"
 
 
+        icon.innerHTML = "🙈"
+
+
     }
+
 
 
     else{
 
 
         password.type = "password"
+
+
+        icon.innerHTML = "👁"
 
 
     }

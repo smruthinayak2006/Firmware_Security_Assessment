@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, send_file, redirect, session
+from werkzeug.security import check_password_hash
 
 import os
 
@@ -77,7 +78,17 @@ def login():
 
 
 
-        if username == "admin" and password == "admin123":
+        stored_password = "scrypt:32768:8:1$IVCS1LCQpmSfkqjb$b58b54a86e90103eebfd6be14e725491a9a90a3b37b1a87ad0fae855cc6e283b3bc895cfd29b4f0ae85de7a5eb5b281a4d0f643bff9cd8472b5a5b3e8ab50b3d"
+
+
+
+        if username == "admin" and check_password_hash(
+
+            stored_password,
+
+            password
+
+        ):
 
 
 
