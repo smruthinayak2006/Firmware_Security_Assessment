@@ -32,6 +32,8 @@ from risk_score import calculate_security_score
 
 from remediation import generate_recommendations
 
+from pdf_generator import generate_pdf_report
+
 
 
 
@@ -55,7 +57,6 @@ app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 
-
 @app.route("/login", methods=["GET", "POST"])
 
 
@@ -71,7 +72,6 @@ def login():
 
 
         password = request.form["password"]
-
 
 
 
@@ -107,7 +107,6 @@ def login():
 
 
 
-
 @app.route("/logout")
 
 
@@ -124,7 +123,6 @@ def logout():
         "/login"
 
     )
-
 
 
 
@@ -197,7 +195,6 @@ def scan():
             "/login"
 
         )
-
 
 
 
@@ -288,12 +285,12 @@ def scan():
 
 
 
+
     results = generate_recommendations(
 
         results
 
     )
-
 
 
 
@@ -316,6 +313,7 @@ def scan():
 
 
 
+
     security_score = calculate_security_score(
 
         results
@@ -330,12 +328,12 @@ def scan():
 
 
 
+
     save_results(
 
         results
 
     )
-
 
 
 
@@ -368,6 +366,26 @@ def scan():
 
 
 
+    generate_pdf_report(
+
+        results,
+
+        summary,
+
+        firmware_info,
+
+        firmware_hash,
+
+        security_score
+
+    )
+
+
+
+
+
+
+
 
 
     return render_template(
@@ -387,9 +405,6 @@ def scan():
         score=security_score
 
     )
-
-
-
 
 
 
@@ -475,13 +490,11 @@ def download():
 
     return send_file(
 
-        "../reports/security_report.json",
+        "../reports/security_report.pdf",
 
         as_attachment=True
 
     )
-
-
 
 
 

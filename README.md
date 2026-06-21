@@ -28,6 +28,9 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - Firmware vulnerability remediation recommendations
 - Security fix guidance for detected issues
 - Patch and mitigation suggestion engine
+- Professional PDF security audit reports
+- Executive summary generation
+- Human readable vulnerability reports
 
 
 ## Technology Stack
@@ -133,6 +136,18 @@ Supports:
 - Hardcoded credential fixes
 - Insecure service mitigation
 - Vulnerable component patch guidance
+
+### PDF Report Generator
+
+Creates professional firmware security assessment reports.
+
+Includes:
+
+- Firmware details
+- Risk score
+- Hash verification
+- Vulnerability findings
+- Remediation guidance
 
 
 ## Screenshots

@@ -1,13 +1,13 @@
 {
     "report_information": {
-        "generated_time": "2026-06-20 18:51:05.074886",
+        "generated_time": "2026-06-21 09:26:06.254532",
         "tool": "Automated Firmware Security Assessment",
         "report_type": "IoT Firmware Security Analysis"
     },
     "firmware_information": {
         "name": "vulnerable_component.txt",
         "size": 69,
-        "scan_time": "2026-06-20 18:51:05",
+        "scan_time": "2026-06-21 09:26:06",
         "sha256": "170c267627b45162f4eeb2e04facf462c27665fa2e4e7ced6460b8b26a0246d3"
     },
     "firmware_integrity": {
