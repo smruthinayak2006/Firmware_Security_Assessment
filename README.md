@@ -54,6 +54,9 @@ It helps identify:
 - Application activity logging
 - Error handling and fault tolerance
 
+- Automated unit testing using pytest
+- Security module validation
+- Regression testing support
 
 
 ## Technology Stack
@@ -67,7 +70,7 @@ It helps identify:
 - Werkzeug Security
 - Binwalk Firmware Extraction
 - Git and GitHub
-
+- Pytest Testing Framework
 
 
 ## Architecture
@@ -260,6 +263,23 @@ Includes:
 - Error handling
 - Activity logging
 
+## Testing Module
+
+Validates core security components.
+
+Tests:
+
+- Risk scoring engine
+- Firmware hashing module
+- Remediation system
+
+
+Ensures:
+
+- Module reliability
+- Regression prevention
+- Future code safety
+
 
 
 # Screenshots
@@ -328,27 +348,33 @@ Includes:
 
 # Current Status
 
+# Current Status
+
 Completed:
 
 - Firmware security scanner
-- Vulnerability detection modules
+- Firmware extraction workflow
+- Secret detection module
+- Configuration analysis
 - CVE detection
-- Integrity verification
+- Hash based integrity verification
 - Risk analysis engine
 - Risk scoring system
 - Remediation engine
-- Flask security dashboard
+- Flask SOC dashboard
 - Authentication system
 - Scan history database
-- PDF audit reporting
+- JSON security reports
+- PDF audit reports
+- Application logging
 - Error handling
-- Logging system
+- Automated testing and validation
 
 
 Remaining Improvements:
 
-- Testing and validation
 - Documentation refinement
+- Repository cleanup
 - Final release preparation
 
 
