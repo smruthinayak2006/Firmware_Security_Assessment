@@ -3,34 +3,57 @@
 
 ## Overview
 
-Automated IoT firmware analysis platform for detecting insecure configurations, exposed secrets, and security risks.
+Automated Firmware Security Assessment is an IoT security analysis platform designed to analyze firmware files, detect vulnerabilities, calculate risk exposure, and generate professional security reports.
 
-The system allows users to upload firmware files through a Flask dashboard, performs security analysis, detects risky configurations and exposed secrets, and generates vulnerability findings.
+The system provides a Flask based dashboard where firmware files can be uploaded and analyzed through multiple security modules.
+
+It helps identify:
+
+- Exposed secrets
+- Hardcoded credentials
+- Insecure configurations
+- Known vulnerable components
+- Firmware integrity changes
+- Overall firmware risk level
 
 
 
 ## Features
 
-- Firmware upload through web interface
-- Automated file analysis
+- Firmware upload through secure web dashboard
+- Automated firmware analysis
+- Recursive file scanning
+- Binwalk based firmware extraction support
+
 - Hardcoded credential detection
-- API key and secret token detection
+- API key and secret detection
 - Insecure configuration detection
-- Severity classification
-- Risk summary dashboard
-- Vulnerability report generation
-- Known vulnerability detection using CVE matching
-- Firmware integrity verification using MD5 and SHA256 hashing
+- CVE based vulnerable component identification
+
+- Firmware metadata extraction
+- MD5 and SHA256 integrity verification
+
+- Severity based vulnerability classification
 - Firmware risk scoring engine
-- Numerical vulnerability prioritization
-- SOC style security dashboard
-- Risk visualization meter
-- Firmware vulnerability remediation recommendations
-- Security fix guidance for detected issues
-- Patch and mitigation suggestion engine
+- Risk visualization dashboard
+
+- Security remediation recommendations
+- Patch and mitigation guidance
+
+- SQLite scan history storage
+- Previous firmware scan tracking
+
+- Secure admin authentication
+- Password hash based verification
+- Session protected dashboard access
+
 - Professional PDF security audit reports
-- Executive summary generation
-- Human readable vulnerability reports
+- JSON security report generation
+
+- Secure file upload handling
+- Application activity logging
+- Error handling and fault tolerance
+
 
 
 ## Technology Stack
@@ -40,6 +63,8 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 - HTML
 - CSS
 - SQLite Database
+- ReportLab PDF Generator
+- Werkzeug Security
 - Binwalk Firmware Extraction
 - Git and GitHub
 
@@ -49,185 +74,308 @@ The system allows users to upload firmware files through a Flask dashboard, perf
 
 Detailed architecture documentation:
 
-See:
+`docs/architecture.md`
 
-docs/architecture.md
 
 
 ## Modules
 
 
-### Scanner Engine
+## Scanner Engine
 
-Handles firmware files and performs recursive analysis.
+Performs firmware analysis and coordinates security scanning.
+
+Responsibilities:
+
+- File traversal
+- Security module execution
+- Vulnerability collection
 
 
-### Secret Detector
 
-Detects sensitive information such as:
+## Firmware Extractor
 
-- Password exposure
+Extracts firmware contents for analysis.
+
+Supports:
+
+- Binwalk extraction
+- Fallback scanning if extraction fails
+
+
+
+## Secret Detector
+
+Detects sensitive information exposure.
+
+Finds:
+
+- Password leaks
 - API keys
 - Secret tokens
 
 
-### Configuration Analyzer
 
-Detects insecure configurations:
+## Configuration Analyzer
+
+Detects insecure firmware configurations.
+
+Examples:
 
 - Debug mode enabled
 - Telnet enabled
-- Encryption disabled
+- Weak security settings
 
 
-### Risk Analyzer
 
-Calculates:
+## CVE Checker
 
-- Total vulnerabilities
-- High severity issues
-- Medium severity issues
-- Low severity issues
-
-
-### CVE Checker
-
-Detects vulnerable firmware components by comparing discovered software versions with a vulnerability database.
+Identifies known vulnerable components.
 
 Detects:
 
-- Vulnerable packages
+- Software versions
 - CVE identifiers
-- Severity level
+- Vulnerability severity
 
 
-### Hash Analyzer
 
-Calculates firmware fingerprints for integrity verification.
+## Firmware Analyzer
+
+Extracts firmware metadata.
+
+Provides:
+
+- File name
+- File size
+- Scan information
+
+
+
+## Hash Analyzer
+
+Performs firmware integrity verification.
 
 Generates:
 
 - MD5 hash
 - SHA256 hash
 
-### Risk Scoring Engine
-
-Calculates firmware security exposure using severity based scoring.
-
-Severity weights:
-
-- High vulnerabilities
-- Medium vulnerabilities
-- Low vulnerabilities
 
 
-Generates:
+## Risk Analyzer
 
-- Firmware risk score
-- Risk level classification
+Generates vulnerability statistics.
+
+Tracks:
+
+- High severity findings
+- Medium severity findings
+- Low severity findings
+
+
+
+## Risk Scoring Engine
+
+Calculates numerical firmware security risk.
+
+Provides:
+
+- Risk score
+- Risk level
 - Remediation priority
 
-### Remediation Engine
 
-Provides recommended security actions for detected firmware vulnerabilities.
 
-Supports:
+## Remediation Engine
 
-- Hardcoded credential fixes
-- Insecure service mitigation
-- Vulnerable component patch guidance
+Provides security recommendations.
 
-### PDF Report Generator
+Examples:
 
-Creates professional firmware security assessment reports.
+- Remove hardcoded credentials
+- Disable insecure services
+- Update vulnerable components
+
+
+
+## Database Module
+
+Stores firmware scan history.
+
+Implemented using SQLite.
+
+Stores:
+
+- Firmware findings
+- Vulnerability history
+- Previous scans
+
+
+
+## Authentication Module
+
+Protects access to the dashboard.
+
+Features:
+
+- Admin login
+- Secure password hash verification
+- Session based authentication
+
+
+
+## Report Generator
+
+Generates machine readable security reports.
+
+Output:
+
+- JSON security report
+
+
+
+## PDF Report Generator
+
+Generates professional audit reports.
 
 Includes:
 
+- Executive summary
 - Firmware details
 - Risk score
-- Hash verification
+- Integrity hashes
 - Vulnerability findings
-- Remediation guidance
+- Remediation steps
 
 
-## Screenshots
+
+## Logging and Hardening
+
+Improves reliability and monitoring.
+
+Includes:
+
+- Secure filename handling
+- Error handling
+- Activity logging
 
 
-### Flask Upload Interface
+
+# Screenshots
+
+
+## Firmware Upload Interface
 
 ![Upload](screenshots/day8_flask_homepage.png)
 
 
-### Scanner Integration
+## Scanner Integration
 
 ![Scanner](screenshots/day9_flask_scanner_integration.png)
 
 
-### Dynamic Firmware Scan
+## Dynamic Firmware Scan
 
 ![Dynamic Scan](screenshots/day10_dynamic_scan.png)
 
 
-### Risk Analysis Dashboard
+## Risk Dashboard
 
 ![Risk Dashboard](screenshots/day11_risk_dashboard.png)
 
 
-### Final Security Dashboard UI
+## Security Dashboard UI
 
 ![Dashboard](screenshots/day15_dashboard_ui.png)
 
 
-### Vulnerability Scan Results
+## Scan Results
 
 ![Results](screenshots/day15_scan_results.png)
 
 
-### CVE Detection
+## CVE Detection
 
 ![CVE Detection](screenshots/day17_cve_detection.png)
 
 
-### Firmware Hash Integrity Analysis
+## Firmware Hash Integrity
 
-![Hash Analysis](screenshots/day18_firmware_hash_integrity.png)
-
-
-### Firmware Scan History
-
-![Scan History](screenshots/day20_scan_history_dashboard.png)
-
-### Admin Authentication
-
-![Login](screenshots/day21_login_authentication.png)
+![Hash](screenshots/day18_firmware_hash_integrity.png)
 
 
-## Current Status
+## Scan History
+
+![History](screenshots/day20_scan_history_dashboard.png)
+
+
+## Secure Login
+
+![Login](screenshots/day26_secure_login.png)
+
+
+## PDF Audit Report
+
+![PDF Report](screenshots/day25_pdf_audit_report.png)
+
+
+## Logging System
+
+![Logs](screenshots/day27_logging_system.png)
+
+
+
+# Current Status
 
 Completed:
 
-Completed:
-
-- Core scanner
-- Security modules
-- Flask integration
-- Upload workflow
-- Risk dashboard
-- Firmware metadata extraction
-- Hash based integrity verification
-- Scan history storage
+- Firmware security scanner
+- Vulnerability detection modules
+- CVE detection
+- Integrity verification
+- Risk analysis engine
+- Risk scoring system
+- Remediation engine
+- Flask security dashboard
 - Authentication system
-- Firmware risk scoring engine
-- SOC style dashboard UI
+- Scan history database
+- PDF audit reporting
+- Error handling
+- Logging system
 
-Upcoming:
 
-- User authentication and access control
-- Dashboard security improvements
-- Advanced vulnerability checks
-- Deployment preparation
+Remaining Improvements:
+
+- Testing and validation
+- Documentation refinement
+- Final release preparation
+
+
+
+## Project Purpose
+
+This project demonstrates an end-to-end IoT firmware security assessment workflow:
+
+Firmware Upload
+
+↓
+
+Security Analysis
+
+↓
+
+Risk Calculation
+
+↓
+
+Remediation Recommendation
+
+↓
+
+Security Reporting
+
 
 
 ## Author
-
 Smruthi Nayak
