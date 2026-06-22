@@ -1,189 +1,120 @@
 from flask import Flask, render_template, request, send_file, redirect, session
 from werkzeug.security import check_password_hash
+from werkzeug.utils import secure_filename
 
 import os
-
 import sys
-
+import logging
 
 
 sys.path.append(
-
     os.path.abspath("analysis")
-
 )
 
 
-
 from scanner import scan_firmware
-
 from firmware_extractor import extract_firmware
-
 from risk_analyzer import calculate_risk_summary
-
 from report_generator import generate_report
-
 from firmware_analyzer import analyze_firmware
-
 from hash_analyzer import calculate_hash
-
 from database import save_results, get_scan_history
-
 from risk_score import calculate_security_score
-
 from remediation import generate_recommendations
-
 from pdf_generator import generate_pdf_report
-
-
 
 
 
 app = Flask(__name__)
 
 
-
 app.secret_key = "firmware_security_secret_key"
 
 
-
 UPLOAD_FOLDER = "uploads"
-
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 
-
+logging.basicConfig(
+    filename="logs/firmware_scanner.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 
 
 @app.route("/login", methods=["GET", "POST"])
-
-
 def login():
-
-
 
     if request.method == "POST":
 
-
-
         username = request.form["username"]
 
-
         password = request.form["password"]
-
-
-
 
 
         stored_password = "scrypt:32768:8:1$IVCS1LCQpmSfkqjb$b58b54a86e90103eebfd6be14e725491a9a90a3b37b1a87ad0fae855cc6e283b3bc895cfd29b4f0ae85de7a5eb5b281a4d0f643bff9cd8472b5a5b3e8ab50b3d"
 
 
-
         if username == "admin" and check_password_hash(
-
             stored_password,
-
             password
-
         ):
-
-
 
             session["logged_in"] = True
 
-
+            logging.info(
+                "Admin logged in successfully"
+            )
 
             return redirect("/")
 
 
-
-
+        logging.warning(
+            "Failed login attempt"
+        )
 
 
     return render_template(
-
         "login.html"
-
     )
-
-
-
-
-
 
 
 
 
 
 @app.route("/logout")
-
-
 def logout():
-
-
 
     session.clear()
 
-
-
     return redirect(
-
         "/login"
-
     )
-
-
-
-
-
 
 
 
 
 
 @app.route("/")
-
-
 def home():
-
-
 
     if "logged_in" not in session:
 
-
-
         return redirect(
-
             "/login"
-
         )
 
 
-
-
-
-
-
     return render_template(
-
         "index.html",
-
         results=None,
-
         summary=None,
-
         filename=None,
-
         score=None
-
     )
-
-
-
-
 
 
 
@@ -191,234 +122,135 @@ def home():
 
 
 @app.route("/scan", methods=["POST"])
-
-
 def scan():
-
-
 
     if "logged_in" not in session:
 
-
-
         return redirect(
-
             "/login"
-
         )
 
 
+    try:
 
+        uploaded_file = request.files["firmware"]
 
 
+        if uploaded_file.filename == "":
 
+            return redirect("/")
 
-    uploaded_file = request.files["firmware"]
 
+        filename = secure_filename(
+            uploaded_file.filename
+        )
 
 
+        file_path = os.path.join(
+            app.config["UPLOAD_FOLDER"],
+            filename
+        )
 
 
+        uploaded_file.save(
+            file_path
+        )
 
-    file_path = os.path.join(
 
-        app.config["UPLOAD_FOLDER"],
+        logging.info(
+            "Firmware uploaded: " + filename
+        )
 
-        uploaded_file.filename
 
-    )
+        firmware_info = analyze_firmware(
+            file_path
+        )
 
 
+        firmware_hash = calculate_hash(
+            file_path
+        )
 
 
+        extracted_path = extract_firmware(
+            file_path
+        )
 
 
+        results = scan_firmware(
+            extracted_path
+        )
 
-    uploaded_file.save(
 
-        file_path
+        results = generate_recommendations(
+            results
+        )
 
-    )
 
+        summary = calculate_risk_summary(
+            results
+        )
 
 
+        security_score = calculate_security_score(
+            results
+        )
 
 
+        save_results(
+            results
+        )
 
 
+        generate_report(
+            results,
+            summary,
+            firmware_info,
+            firmware_hash,
+            security_score
+        )
 
-    firmware_info = analyze_firmware(
 
-        file_path
+        generate_pdf_report(
+            results,
+            summary,
+            firmware_info,
+            firmware_hash,
+            security_score
+        )
 
-    )
 
+        logging.info(
+            "Scan completed: " + filename
+        )
 
 
+        return render_template(
+            "index.html",
+            results=results,
+            summary=summary,
+            filename=filename,
+            firmware=firmware_info,
+            firmware_hash=firmware_hash,
+            score=security_score
+        )
 
 
+    except Exception as error:
 
-    firmware_hash = calculate_hash(
+        logging.error(
+            str(error)
+        )
 
-        file_path
 
-    )
-
-
-
-
-
-
-
-
-    extracted_path = extract_firmware(
-
-        file_path
-
-    )
-
-
-
-
-
-
-
-
-    results = scan_firmware(
-
-        extracted_path
-
-    )
-
-
-
-
-
-
-
-
-    results = generate_recommendations(
-
-        results
-
-    )
-
-
-
-
-
-
-
-
-
-    summary = calculate_risk_summary(
-
-        results
-
-    )
-
-
-
-
-
-
-
-
-
-    security_score = calculate_security_score(
-
-        results
-
-    )
-
-
-
-
-
-
-
-
-
-
-    save_results(
-
-        results
-
-    )
-
-
-
-
-
-
-
-
-
-
-    generate_report(
-
-        results,
-
-        summary,
-
-        firmware_info,
-
-        firmware_hash,
-
-        security_score
-
-    )
-
-
-
-
-
-
-
-
-
-    generate_pdf_report(
-
-        results,
-
-        summary,
-
-        firmware_info,
-
-        firmware_hash,
-
-        security_score
-
-    )
-
-
-
-
-
-
-
-
-
-    return render_template(
-
-        "index.html",
-
-        results=results,
-
-        summary=summary,
-
-        filename=uploaded_file.filename,
-
-        firmware=firmware_info,
-
-        firmware_hash=firmware_hash,
-
-        score=security_score
-
-    )
-
-
-
+        return render_template(
+            "index.html",
+            results=None,
+            summary=None,
+            filename=None,
+            score=None,
+            error="Firmware analysis failed"
+        )
 
 
 
@@ -426,50 +258,22 @@ def scan():
 
 
 @app.route("/history")
-
-
 def history():
-
-
 
     if "logged_in" not in session:
 
-
-
         return redirect(
-
             "/login"
-
         )
-
-
-
-
-
-
 
 
     scan_history = get_scan_history()
 
 
-
-
-
-
-
-
     return render_template(
-
         "history.html",
-
         history=scan_history
-
     )
-
-
-
-
-
 
 
 
@@ -477,39 +281,19 @@ def history():
 
 
 @app.route("/download")
-
-
 def download():
-
-
 
     if "logged_in" not in session:
 
-
-
         return redirect(
-
             "/login"
-
         )
 
 
-
-
-
-
-
     return send_file(
-
         "../reports/security_report.pdf",
-
         as_attachment=True
-
     )
-
-
-
-
 
 
 
@@ -518,10 +302,6 @@ def download():
 
 if __name__ == "__main__":
 
-
-
     app.run(
-
         debug=True
-
     )
