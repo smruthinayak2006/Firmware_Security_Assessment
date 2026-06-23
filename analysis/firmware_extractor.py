@@ -7,8 +7,6 @@ def extract_firmware(file_path):
 
     output_folder = "extracted_firmware"
 
-
-    # remove old extraction data
     if os.path.exists(output_folder):
 
         shutil.rmtree(
@@ -19,6 +17,18 @@ def extract_firmware(file_path):
     os.makedirs(
         output_folder
     )
+
+
+    if shutil.which("binwalk") is None:
+
+        print(
+            "Binwalk not installed. Direct firmware scanning enabled."
+        )
+
+
+        return os.path.dirname(
+            file_path
+        )
 
 
     try:
@@ -43,11 +53,12 @@ def extract_firmware(file_path):
 
     except Exception as error:
 
-
         print(
             "Firmware extraction failed:",
             error
         )
 
 
-        return file_path
+        return os.path.dirname(
+            file_path
+        )

@@ -1,14 +1,48 @@
-venv/
-
+# Python cache
 __pycache__/
-
 *.pyc
+*.pyo
 
+
+# Virtual environment
+venv/
+env/
+
+
+# Database files
 *.db
+*.sqlite3
 
+
+# Runtime folders
+uploads/*
+!uploads/.gitkeep
+
+reports/*
+!reports/.gitkeep
+
+logs/*
+!logs/.gitkeep
+
+
+# Generated reports
+reports/*.pdf
+reports/*.json
+
+
+# Environment variables
 .env
 
-.DS_Store
 
-uploads/
+# IDE files
+.vscode/
+
+
+# Pytest cache
+.pytest_cache/
+
+
+# OS files
+.DS_Store
+Thumbs.db
 
